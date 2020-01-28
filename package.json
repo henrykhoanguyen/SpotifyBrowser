@@ -4,7 +4,11 @@
   "description": "web interface for spotify",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node server",
+    "client-install": "npm install --prefix Spotify-Client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix Spotify-Client",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,21 @@
   "bugs": {
     "url": "https://github.com/henrykhoanguyen/SpotifyBrowser/issues"
   },
-  "homepage": "https://github.com/henrykhoanguyen/SpotifyBrowser#readme"
+  "homepage": "https://github.com/henrykhoanguyen/SpotifyBrowser#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.4.1"
+  }
 }
