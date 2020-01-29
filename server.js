@@ -5,8 +5,16 @@ const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
+const errorHandler = require("./middleware/errorHandler");
+
+// Route files
+const index = require("./routes/index");
 
 const app = express();
+
+app.use(cors());
+// Body parser
+app.use(express.json());
 
 const limit = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 mins
@@ -18,6 +26,10 @@ app.use(limit);
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use('/', index);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
