@@ -28,7 +28,7 @@ In config folder, you will need to create a file named `config.env`. Inside, you
 
 - `Client_Secret= <your client secret>`
 
-The value for these variables can be found after you create a Spotify Developer account. It is required to set up the Express server. Create a Spotify Dev account or log in at https://developer.spotify.com/dashboard/ and follow the instructions to create a client id. Name the app and description whatever you'd like. Make sure that the purpose of the app is for non-commercial use only since we're all here to learn! :D
+The value for these variables can be found after you create a Spotify Developer account. It is required to set up the Express server. Create a Spotify Dev account or log in at https://developer.spotify.com/dashboard/ and follow the instructions to create a client id. Name the app and description whatever you'd like. Make sure that the purpose of the app is for non-commercial use only since we're all here to learn! :D For  more information on how to register your app, please follow this [link](https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app).
 
 You will also need to create `token.json` file in the config folder that will hold `access_token` and `refresh_token`. These two variables will be set to null. Once the access token and refresh token are retrieved, the file will be overwritten. Set the json file as follow.
 ```

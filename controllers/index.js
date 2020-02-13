@@ -1,19 +1,75 @@
 const dotenv = require("dotenv");
 const fetch = require("node-fetch");
 const fs = require("fs");
+// const asyncHandler = require("../middleware/async");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
 const redirect_uri = "http://localhost:5000/callback";
-var my_client_id = null;
-var my_client_secret = null;
 var access_token = null;
 var refresh_token = null;
 
+function refresh() {
+	const params = new URLSearchParams();
+	params.append('refresh_token', refresh_token);
+	params.append('grant_type', 'refresh_token');
+
+	var headers = {
+		'Content-Type':'application/x-www-form-urlencoded',
+		'Authorization': 'Basic ' + Buffer.from(process.env.Client_ID + ':' + process.env.Client_Secret).toString('base64')
+	};
+
+	return fetch('https://accounts.spotify.com/api/token', {method: 'POST', body: params, headers: headers}).then(response => {
+		if(response.ok) {
+			return response.json();
+		} else {
+			throw "Error refreshing token";
+		}
+	}).then(json => {
+		access_token = json.access_token;
+		refresh_token = json.refresh_token;
+		fs.writeFile('./config/tokens.json', JSON.stringify({access_token: access_token, refresh_token: refresh_token}), () => {
+			return Promise.resolve();
+		});
+	}).catch(err => console.error(err));
+}
+
+function makeAPIRequest(url, res) {
+	var headers = {
+		'Content-Type':'application/x-www-form-urlencoded',
+		'Authorization': 'Bearer ' + access_token
+	};
+
+	fetch(url, {method: 'GET', headers: headers}).then(response => {
+		if(response.ok) {
+			return response.json();
+		} else {
+			if(response.status == 401) {
+				refresh().then(() => {
+					return fetch(url, {method: 'GET', headers: headers}).then(response => {
+						if(response.ok) {
+							return response.json();
+						} else {
+							console.log(response);
+							res.status(response.status).end();
+						}
+					});
+				});
+			} else {
+				console.log(response);
+				res.status(response.status).end();
+			}
+			return null;
+		}
+	}).then(json => {
+		res.json(json);
+	}).catch(err => {
+		console.error(err);
+	});
+}
+
 exports.general = (req, res, next) => {
-  my_client_id = process.env.Client_ID;
-  my_client_secret = process.env.Client_Secret;
   fs.readFile("./config/tokens.json", (err, data) => {
     data = JSON.parse(data);
     // console.log(JSON.parse(data));
@@ -87,7 +143,7 @@ exports.callBack = (req, res, next) => {
           refresh_token: refresh_token
         }),
         () => {
-          res.redirect("http://localhost:4200");
+          res.redirect("http://localhost:4200/me");
         }
       );
     })
@@ -96,3 +152,7 @@ exports.callBack = (req, res, next) => {
   // console.log(header);
   // res.status(200).json({ success: true });
 };
+
+exports.aboutMe = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me", res);
+}

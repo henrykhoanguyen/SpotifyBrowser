@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Reenie+Beanie&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(#948977, #ffffff);
+  background-repeat: no-repeat;
+  font-family: Poppins, sans-serif;
+  color: white;
+}
+
+@media screen and (max-width: 720px) {
+  html,
+  body {
+    background: #948977;
+    background-repeat: no-repeat;
+
+  }
+}

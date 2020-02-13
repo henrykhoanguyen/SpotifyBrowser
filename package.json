@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node server",
-    "client-install": "npm install --prefix Spotify-Client",
+    "client-install": "npm install --prefix spotify-client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix Spotify-Client",
     "server": "nodemon server.js"

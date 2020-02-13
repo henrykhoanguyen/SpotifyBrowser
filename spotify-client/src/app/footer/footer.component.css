@@ -1,0 +1,16 @@
+.navItem {
+  margin: auto;
+}
+
+nav {
+  animation: display 3s ease-in forwards;
+}
+
+@keyframes display {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
