@@ -38,14 +38,14 @@
   transform-origin: center;
 }
 
-.title {
+.call-to-action .title {
   position: relative;
   font-family: Reenie Beanie, sans-serif;
   font-size: 8em;
   line-height: 0.75;
 }
 
-.subtitle {
+.call-to-action .subtitle {
   font-weight: 500;
   font-size: 1.2em;
   padding-bottom: 2%;

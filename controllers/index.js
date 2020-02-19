@@ -156,3 +156,17 @@ exports.callBack = (req, res, next) => {
 exports.aboutMe = (req, res, next) => {
   makeAPIRequest("https://api.spotify.com/v1/me", res);
 }
+
+/* TODO:
+> Get User's Top Artists and Tracks: https://developer.spotify.com/console/get-current-user-top-artists-and-tracks/?type=artists%26tracks&time_range=&limit=&offset=
+
+> Get Followed Artists: https://developer.spotify.com/console/get-following/?type=artist&after=&limit=20
+
+> Get a List of Current User's Playlists: https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
+
+> Get Current User's Saved Tracks: https://developer.spotify.com/console/get-current-user-saved-tracks/
+
+> Get Recommendations Based on Seeds: https://developer.spotify.com/console/get-recommendations/?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&market=US
+
+> Search for an Item: https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
+*/
