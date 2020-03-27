@@ -43,6 +43,7 @@ function makeAPIRequest(url, res) {
 
 	fetch(url, {method: 'GET', headers: headers}).then(response => {
 		if(response.ok) {
+      // console.log(access_token);
 			return response.json();
 		} else {
 			if(response.status == 401) {
@@ -63,13 +64,18 @@ function makeAPIRequest(url, res) {
 			return null;
 		}
 	}).then(json => {
-		res.json(json);
+    // console.log(json);
+		res.status(200).json({
+      success: true,
+      data: json
+    });
 	}).catch(err => {
 		console.error(err);
 	});
 }
 
 exports.general = (req, res, next) => {
+  // console.log("HELLO")
   fs.readFile("./config/tokens.json", (err, data) => {
     data = JSON.parse(data);
     // console.log(JSON.parse(data));
@@ -82,7 +88,15 @@ exports.general = (req, res, next) => {
 exports.login = (req, res, next) => {
   // console.log(process.env.Client_ID);
 
-  var scopes = "user-read-private user-read-email";
+  // 1. user-read-private: Read access to user’s subscription details
+      // endpoints: Search for an Item, Get Current User's Profile.
+  // 2. user-read-email: Read access to user’s email address
+      // endpoints: Get Current User's Profile
+  // 3. user-top-read: Read access to a user's top artists and tracks.
+      // endpoints: Get a User's Top Artists and Tracks.
+  // 4. user-follow-read: Read access to the list of artists and other users that the user follows.
+      // endpoints: Check if Current User Follows Artists or Users, Get User's Followed Artists
+  var scopes = "user-read-private user-read-email user-top-read user-follow-read";
   res.redirect(
     "https://accounts.spotify.com/authorize" +
       "?response_type=code" +
@@ -144,6 +158,7 @@ exports.callBack = (req, res, next) => {
         }),
         () => {
           res.redirect("http://localhost:4200/me");
+          // res.status(200).json({ success: true });
         }
       );
     })
@@ -153,14 +168,31 @@ exports.callBack = (req, res, next) => {
   // res.status(200).json({ success: true });
 };
 
+// Get Info About Logged in User
+// https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/
 exports.aboutMe = (req, res, next) => {
   makeAPIRequest("https://api.spotify.com/v1/me", res);
 }
 
-/* TODO:
-> Get User's Top Artists and Tracks: https://developer.spotify.com/console/get-current-user-top-artists-and-tracks/?type=artists%26tracks&time_range=&limit=&offset=
+// Get User's Top Artists 
+// https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+exports.topArtists = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me/top/artists", res);
+}
 
-> Get Followed Artists: https://developer.spotify.com/console/get-following/?type=artist&after=&limit=20
+// Get User's Top Tracks
+// https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+exports.topTracks = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me/top/tracks?limit=10", res);
+}
+
+// Get Followed Artists
+// https://developer.spotify.com/console/get-following/?type=artist&after=&limit=20
+exports.followedArtists = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me/following?type=artist&limit=20", res);
+}
+
+/* TODO:
 
 > Get a List of Current User's Playlists: https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
 

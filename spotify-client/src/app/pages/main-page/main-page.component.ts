@@ -9,12 +9,21 @@ import { asyncHandler } from '../../../../../middleware/async';
 })
 export class MainPageComponent implements OnInit {
   private myInfo;
+  private topArtists;
+  private topTracks;
+  private myArtists;
 
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
     this.myInfo = this.spotifyService.aboutMe();
-    console.log(this.myInfo);
+    this.topArtists = this.spotifyService.topArtists();
+    this.topTracks = this.spotifyService.topTracks();
+    this.myArtists = this.spotifyService.myArtists();
+    console.log('User info loaded', this.myInfo);
+    console.log('Top Artists', this.topArtists);
+    console.log('Top Tracks', this.topTracks);
+    console.log('My Artists', this.myArtists);
   }
 
 }
