@@ -8,22 +8,33 @@ import { asyncHandler } from '../../../../../middleware/async';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-  private myInfo;
-  private topArtists;
-  private topTracks;
-  private myArtists;
+  userImg = '../../../assets/user.png';
+  userName = 'Loading...';
+  userProfile = '#';
+
+  myArtists;
+  myTracks;
 
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
-    this.myInfo = this.spotifyService.aboutMe();
-    this.topArtists = this.spotifyService.topArtists();
-    this.topTracks = this.spotifyService.topTracks();
-    this.myArtists = this.spotifyService.myArtists();
-    console.log('User info loaded', this.myInfo);
-    console.log('Top Artists', this.topArtists);
-    console.log('Top Tracks', this.topTracks);
-    console.log('My Artists', this.myArtists);
+    this.spotifyService.aboutMe().then(data => {
+      this.userImg = data.userImg;
+      this.userName = data.name;
+      this.userProfile = data.userProfile;
+
+      console.log('User info loaded...');
+    });
+
+    this.spotifyService.topArtists().then(artists => {
+      this.myArtists = artists;
+      // console.log('Artists info loaded...', this.myArtists);
+    });
+
+    this.spotifyService.topTracks().then(tracks => {
+      this.myTracks = tracks;
+      console.log('Tracks info loaded...', this.myTracks);
+    });
   }
 
 }

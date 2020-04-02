@@ -6,7 +6,10 @@ const {
   aboutMe,
   topArtists,
   topTracks,
-  followedArtists
+  followedArtists,
+  getUserPlaylists,
+  getUserSavedTracks,
+  getRecommendations
 } = require("../controllers/index");
 
 const router = express.Router();
@@ -21,5 +24,10 @@ router.route("/topArtists").get(topArtists);
 router.route("/topTracks").get(topTracks);
 
 router.route("/followedArtists").get(followedArtists);
+router.route("/getUserPlaylists").get(getUserPlaylists);
+router.route("/getUserSavedTracks").get(getUserSavedTracks);
+
+// This require seeds: artist id, genres, and tracks
+router.route("/recommendations").get(getRecommendations);
 
 module.exports = router;

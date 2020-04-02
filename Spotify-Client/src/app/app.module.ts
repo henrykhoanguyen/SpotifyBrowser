@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CarouseCardComponent } from './components/carouse-card/carouse-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     FooterComponent,
     MainPageComponent,
     ArtistPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    CarouseCardComponent
   ],
   imports: [
     BrowserModule,

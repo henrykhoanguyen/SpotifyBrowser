@@ -96,7 +96,11 @@ exports.login = (req, res, next) => {
       // endpoints: Get a User's Top Artists and Tracks.
   // 4. user-follow-read: Read access to the list of artists and other users that the user follows.
       // endpoints: Check if Current User Follows Artists or Users, Get User's Followed Artists
-  var scopes = "user-read-private user-read-email user-top-read user-follow-read";
+  // 5. playlist-read-private: Read access to user's private playlists
+      // endpoints: Check if Users Follow a Playlist, Get a List of Current User's Playlists, Get a List of a User's Playlists
+  // 6. user-library-read: Read access to a user's "Your Music" library
+      // endpoints: Check User's Saved Albums, Check User's Saved Tracks, Get Current User's Saved Albums, Get a User's Saved Tracks
+  var scopes = "user-read-private user-read-email user-top-read user-follow-read playlist-read-private user-library-read";
   res.redirect(
     "https://accounts.spotify.com/authorize" +
       "?response_type=code" +
@@ -192,13 +196,26 @@ exports.followedArtists = (req, res, next) => {
   makeAPIRequest("https://api.spotify.com/v1/me/following?type=artist&limit=20", res);
 }
 
-/* TODO:
+// Get a List of Current User's Playlists
+// https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
+exports.getUserPlaylists = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me/playlists", res);
+}
 
-> Get a List of Current User's Playlists: https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
+// Get Current User's Saved Tracks
+// https://developer.spotify.com/console/get-current-user-saved-tracks/
+exports.getUserSavedTracks = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/me/tracks", res);
+}
 
-> Get Current User's Saved Tracks: https://developer.spotify.com/console/get-current-user-saved-tracks/
+// Get Recommendations Based on Seeds
+// https://developer.spotify.com/console/get-recommendations/?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&market=US
+exports.getRecommendations = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/recommendations", res);
+}
 
-> Get Recommendations Based on Seeds: https://developer.spotify.com/console/get-recommendations/?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&market=US
-
-> Search for an Item: https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
-*/
+// Search for an Item
+// https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
+exports.search = (req, res, next) => {
+  makeAPIRequest("https://api.spotify.com/v1/search", res);
+}

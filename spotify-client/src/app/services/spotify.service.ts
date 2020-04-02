@@ -28,6 +28,7 @@ export class SpotifyService {
     return this.sendRequest2Express('/me').then(data => {
       if (data.success) {
         // console.log('User\'s profile loaded...');
+        // console.log(data);
         return new ProfileData(data.data);
       } else {
         return data.success;
@@ -35,34 +36,30 @@ export class SpotifyService {
     });
   }
 
-  topArtists() {
+  topArtists(): Promise<ArtistData> {
     return this.sendRequest2Express('/topArtists').then(artists => {
       if (artists.success) {
         // console.log(artists.data.limit, artists.data.items);
-        let artistArr = [];
-        for (let i = 0; i < artists.data.limit; i++) {
-          // console.log(artists.data.items[i]);
-          artistArr.push(new ArtistData(artists.data.items[i]));
-        }
-        // console.log(artistArr);
-        return artistArr;
+
+        return artists.data.items.map(artist => {
+          // console.log(artist);
+          return new ArtistData(artist);
+        });
+
       } else {
         return artists.success;
       }
     });
   }
 
-  topTracks() {
+  topTracks(): Promise<TrackData> {
     return this.sendRequest2Express('/topTracks').then(tracks => {
-      console.log(tracks.data.limit, tracks.data, tracks.data.items);
+      // console.log(tracks.data.limit, tracks.data, tracks.data.items);
       if (tracks.success) {
-        let trackArr = [];
-        for (let i = 0; i < tracks.data.limit; i++) {
-          // console.log(artists.data.items[i]);
-          trackArr.push(new ArtistData(tracks.data.items[i]));
-        }
-        // console.log(artistArr);
-        return trackArr;
+        return tracks.data.items.map(track => {
+          console.log(track);
+          return new TrackData(track);
+        });
       } else {
         return tracks.success;
       }
@@ -71,8 +68,19 @@ export class SpotifyService {
 
   myArtists() {
     return this.sendRequest2Express('/followedArtists').then(artists => {
-      // console.log(artists);
+      console.log(artists.data);
     });
   }
 
+  getUserPlaylists() {
+    return this.sendRequest2Express('/getUserPlaylists').then(playlists => {
+      console.log(playlists);
+    });
+  }
+
+  getUserSavedTracks() {
+    return this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
+      console.log(tracks.data);
+    });
+  }
 }
