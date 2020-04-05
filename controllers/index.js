@@ -44,6 +44,7 @@ function makeAPIRequest(url, res) {
 	fetch(url, {method: 'GET', headers: headers}).then(response => {
 		if(response.ok) {
       // console.log(access_token);
+      // console.log(response);
 			return response.json();
 		} else {
 			if(response.status == 401) {
@@ -52,15 +53,15 @@ function makeAPIRequest(url, res) {
 						if(response.ok) {
 							return response.json();
 						} else {
-							console.log(response);
+							// console.log(response);
 							res.status(response.status).end();
 						}
 					});
 				});
 			} else {
-				console.log(response);
+				// console.log(response);
 				res.status(response.status).end();
-			}
+      }
 			return null;
 		}
 	}).then(json => {
@@ -76,6 +77,7 @@ function makeAPIRequest(url, res) {
 
 exports.general = (req, res, next) => {
   // console.log("HELLO")
+  
   fs.readFile("./config/tokens.json", (err, data) => {
     data = JSON.parse(data);
     // console.log(JSON.parse(data));

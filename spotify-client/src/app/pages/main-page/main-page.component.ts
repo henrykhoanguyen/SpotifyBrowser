@@ -33,7 +33,7 @@ export class MainPageComponent implements OnInit {
 
     this.spotifyService.topTracks().then(tracks => {
       this.myTracks = tracks;
-      console.log('Tracks info loaded...', this.myTracks);
+      // console.log('Tracks info loaded...', this.myTracks);
     });
   }
 

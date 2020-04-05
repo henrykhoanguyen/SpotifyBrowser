@@ -8,6 +8,8 @@ import { SpotifyService } from '../../services/spotify.service';
 })
 export class NavBarComponent implements OnInit {
 
+  isLoggedIn = false;
+
   constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {

@@ -12,7 +12,7 @@ export class CarouseCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.artists);
+    // console.log(this.artists);
   }
 
 }

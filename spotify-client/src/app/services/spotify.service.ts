@@ -16,7 +16,7 @@ export class SpotifyService {
   }
 
   private sendRequest2Express(endpoint: string): Promise<any> {
-    // console.log(this.expressBaseUrl + endpoint);
+    console.log(this.expressBaseUrl + endpoint);
     this.http.get(this.expressBaseUrl + endpoint).subscribe(res => {});
 
     return Promise.resolve(
@@ -24,40 +24,39 @@ export class SpotifyService {
     );
   }
 
-  aboutMe(): Promise<ProfileData> {
-    return this.sendRequest2Express('/me').then(data => {
+  async aboutMe(): Promise<ProfileData> {
+    return await this.sendRequest2Express('/me').then(data => {
       if (data.success) {
         // console.log('User\'s profile loaded...');
         // console.log(data);
         return new ProfileData(data.data);
       } else {
+        // console.log(data);
         return data.success;
       }
     });
   }
 
-  topArtists(): Promise<ArtistData> {
-    return this.sendRequest2Express('/topArtists').then(artists => {
+  async topArtists(): Promise<ArtistData> {
+    return await this.sendRequest2Express('/topArtists').then(artists => {
       if (artists.success) {
         // console.log(artists.data.limit, artists.data.items);
-
         return artists.data.items.map(artist => {
           // console.log(artist);
           return new ArtistData(artist);
         });
-
       } else {
         return artists.success;
       }
     });
   }
 
-  topTracks(): Promise<TrackData> {
-    return this.sendRequest2Express('/topTracks').then(tracks => {
+  async topTracks(): Promise<TrackData> {
+    return await this.sendRequest2Express('/topTracks').then(tracks => {
       // console.log(tracks.data.limit, tracks.data, tracks.data.items);
       if (tracks.success) {
         return tracks.data.items.map(track => {
-          console.log(track);
+          // console.log(track);
           return new TrackData(track);
         });
       } else {

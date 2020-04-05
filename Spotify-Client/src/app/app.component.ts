@@ -7,7 +7,6 @@ import { SpotifyService } from './services/spotify.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'spotify-client';
 
   constructor(private spotifyService: SpotifyService) {}
 
