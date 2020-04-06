@@ -1,7 +1,8 @@
 .profile-img {
-  width: 40%;
+  width: 10%;
   border-radius: 50%;
   float: center;
+  margin-bottom: 1em;
 }
 
 .profile-box {
@@ -9,24 +10,27 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-top: 2em;
 }
 
 .dashboard-box{
   display: flex;
   flex-direction: row;
   position: relative;
+  margin: 0 2% 2em 2%;
+}
+
+hr {
+  margin: 4% 0 4% 0;
+  border-color: white;
+  border-style: double;
 }
 
 .artists-box{
   width: 50%;
   margin-right: 2em;
-
 }
 
 .tracks-box{
   width: 100%;
-}
-
-.tracks-box a {
-  color: white;
 }

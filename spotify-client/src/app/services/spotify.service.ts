@@ -16,7 +16,7 @@ export class SpotifyService {
   }
 
   private sendRequest2Express(endpoint: string): Promise<any> {
-    console.log(this.expressBaseUrl + endpoint);
+    // console.log(this.expressBaseUrl + endpoint);
     this.http.get(this.expressBaseUrl + endpoint).subscribe(res => {});
 
     return Promise.resolve(

@@ -10,7 +10,7 @@ export class NavBarService {
   private isLoggedIn = new Subject<boolean>();
 
   constructor() {
-    this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'})
+    this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'});
     this.isLoggedIn.next(false);
   }
 
@@ -24,7 +24,7 @@ export class NavBarService {
 
   updateLoginStatus(status: boolean) {
     this.isLoggedIn.next(status);
-
+    // console.log(status);
     if (!status) {
       this.clearAllLinks();
       this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'});
@@ -36,6 +36,9 @@ export class NavBarService {
     this.removeLink({ linkName: 'Login' });
     // add links here. Probably will need to pass in a variable to ensure
     // user is logged in successfully.
+    this.links.push({ linkName: 'Dashboard', path: 'me' });
+    this.links.push({ linkName: 'About', path: 'about' });
+    // console.log(this.links);
   }
 
   removeLink({ linkName }) {

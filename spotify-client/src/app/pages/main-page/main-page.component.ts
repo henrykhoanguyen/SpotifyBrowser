@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+// Services
 import { SpotifyService } from '../../services/spotify.service';
-import { asyncHandler } from '../../../../../middleware/async';
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-main-page',
@@ -15,9 +16,12 @@ export class MainPageComponent implements OnInit {
   myArtists;
   myTracks;
 
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
   ngOnInit() {
+    this.navbarService.updateNavAfterAuth();
+    this.navbarService.updateLoginStatus(true);
+
     this.spotifyService.aboutMe().then(data => {
       this.userImg = data.userImg;
       this.userName = data.name;

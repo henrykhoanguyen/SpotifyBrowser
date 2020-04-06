@@ -1,0 +1,33 @@
+<h3>My Top 10 Tracks</h3>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Track Name</th>
+      <th scope="col">Artist(s)</th>
+      <th scope="col">Album</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let track of tracks; let i = index">
+    <tr>
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <a [href]="track.trackURL">
+          {{ track.name }}
+        </a>
+      </td>
+      <td>
+        <div *ngFor="let artist of track.artists">
+          <a [href]="artist.external_urls.spotify" target="blank">{{
+            artist.name
+          }}</a>
+        </div>
+      </td>
+      <td>
+        <a [href]="track.album.external_urls.spotify" target="blank">{{
+          track.album.name
+        }}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
