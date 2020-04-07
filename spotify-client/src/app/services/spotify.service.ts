@@ -79,7 +79,15 @@ export class SpotifyService {
 
   getUserSavedTracks() {
     return this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
-      console.log(tracks.data);
+      // console.log(tracks.data);
+      if (tracks.success) {
+        return tracks.data.items.map(track => {
+          // console.log(track.track);
+          return new TrackData(track.track);
+        });
+      } else {
+        return tracks.success;
+      }
     });
   }
 }

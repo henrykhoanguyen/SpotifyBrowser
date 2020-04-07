@@ -13,8 +13,11 @@ export class MainPageComponent implements OnInit {
   userName = 'Loading...';
   userProfile = '#';
 
-  myArtists;
-  myTracks;
+  myArtists; // Top 10 artists
+  myTracks; // Top 10 tracks
+
+  myPlaylists; // Saved playlists
+  mySavedTracks; // Saved Tracks
 
   constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
@@ -38,6 +41,20 @@ export class MainPageComponent implements OnInit {
     this.spotifyService.topTracks().then(tracks => {
       this.myTracks = tracks;
       // console.log('Tracks info loaded...', this.myTracks);
+    });
+
+    // this.spotifyService.getUserPlaylists().then(playlists => {
+    //   this.myPlaylists = playlists;
+    //   console.log('Saved playlists loaded...', this.myPlaylists);
+    // });
+
+    // this.spotifyService.myArtists().then(artists => {
+    //   console.log('My followed artists loaded...');
+    // });
+
+    this.spotifyService.getUserSavedTracks().then(tracks => {
+      this.mySavedTracks = tracks;
+      console.log('My saved tracks loaded...', this.mySavedTracks);
     });
   }
 

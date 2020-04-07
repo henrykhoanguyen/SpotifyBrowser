@@ -31,12 +31,11 @@ export class NavBarService {
     }
   }
 
-  // TODO: add links to different page when user login
   updateNavAfterAuth() {
     this.removeLink({ linkName: 'Login' });
-    // add links here. Probably will need to pass in a variable to ensure
-    // user is logged in successfully.
+
     this.links.push({ linkName: 'Dashboard', path: 'me' });
+    // TODO: make an About page
     this.links.push({ linkName: 'About', path: 'about' });
     // console.log(this.links);
   }

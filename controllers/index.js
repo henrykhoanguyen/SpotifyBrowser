@@ -213,6 +213,8 @@ exports.getUserSavedTracks = (req, res, next) => {
 // Get Recommendations Based on Seeds
 // https://developer.spotify.com/console/get-recommendations/?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_tracks=0c6xIDDpzE81m2q797ordA&min_energy=0.4&min_popularity=50&market=US
 exports.getRecommendations = (req, res, next) => {
+  var artist_seed = req.params.artist;
+  var track_seed = req.params.track;
   makeAPIRequest("https://api.spotify.com/v1/recommendations", res);
 }
 

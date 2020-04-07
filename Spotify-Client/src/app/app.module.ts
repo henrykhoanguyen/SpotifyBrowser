@@ -11,6 +11,7 @@ import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CarouseCardComponent } from './components/carouse-card/carouse-card.component';
 import { TracksTableComponent } from './components/tracks-table/tracks-table.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TracksTableComponent } from './components/tracks-table/tracks-table.com
     ArtistPageComponent,
     HomePageComponent,
     CarouseCardComponent,
-    TracksTableComponent
+    TracksTableComponent,
+    AboutPageComponent
   ],
   imports: [
     BrowserModule,
