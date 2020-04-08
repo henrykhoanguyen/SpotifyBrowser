@@ -43,10 +43,10 @@ export class MainPageComponent implements OnInit {
       // console.log('Tracks info loaded...', this.myTracks);
     });
 
-    // this.spotifyService.getUserPlaylists().then(playlists => {
-    //   this.myPlaylists = playlists;
-    //   console.log('Saved playlists loaded...', this.myPlaylists);
-    // });
+    this.spotifyService.getUserPlaylists().then(playlists => {
+      this.myPlaylists = playlists;
+      // console.log('Saved playlists loaded...', this.myPlaylists);
+    });
 
     // this.spotifyService.myArtists().then(artists => {
     //   console.log('My followed artists loaded...');

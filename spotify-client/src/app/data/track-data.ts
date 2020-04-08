@@ -1,6 +1,6 @@
 export class TrackData {
   name: string;
-  trackNumber: number;
+  trackId: number;
   type: string;
   artists: [];
   trackURL: string;
@@ -8,7 +8,7 @@ export class TrackData {
 
   constructor(objectModel: {}) {
     this.name = objectModel['name'];
-    this.trackNumber = objectModel['id'];
+    this.trackId = objectModel['id'];
     this.type = objectModel['type'];
     this.artists = objectModel['artists'];
     this.trackURL = objectModel['external_urls'].spotify;

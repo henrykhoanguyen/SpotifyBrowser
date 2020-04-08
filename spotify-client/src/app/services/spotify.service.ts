@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { ProfileData } from '../data/profile-data';
 import { TrackData } from '../data/track-data';
 import { ArtistData } from '../data/artist-data';
+import { PlaylistData } from '../data/playlist-data';
 
 @Injectable({
   providedIn: 'root'
@@ -71,14 +72,20 @@ export class SpotifyService {
     });
   }
 
-  getUserPlaylists() {
-    return this.sendRequest2Express('/getUserPlaylists').then(playlists => {
-      console.log(playlists);
+  async getUserPlaylists() {
+    return await this.sendRequest2Express('/getUserPlaylists').then(playlists => {
+      if (playlists.success) {
+        return playlists.data.items.map(playlist => {
+          return new PlaylistData(playlist);
+        });
+      } else {
+        return playlists.success;
+      }
     });
   }
 
-  getUserSavedTracks() {
-    return this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
+  async getUserSavedTracks() {
+    return await this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
       // console.log(tracks.data);
       if (tracks.success) {
         return tracks.data.items.map(track => {

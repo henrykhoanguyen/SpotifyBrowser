@@ -1,0 +1,17 @@
+<div *ngFor="let playlist of playlists" style="margin-right: 1%;">
+  <div class="card" style="width: 18rem;">
+    <img [src]="playlist.playlistImg" class="card-img-top" alt="" />
+    <div class="card-body">
+      <h5 class="card-title">{{ playlist.name }}</h5>
+      <p class="card-text" *ngIf="playlist.description !== ''">
+        {{ playlist.description }}
+      </p>
+      <p class="card-text" *ngIf="playlist.description === ''">
+        A nice playlist that you love.
+      </p>
+      <a [href]="playlist.playlistURL" class="btn btn-outline-dark" target="blank"
+        >Visit Playlist</a
+      >
+    </div>
+  </div>
+</div>

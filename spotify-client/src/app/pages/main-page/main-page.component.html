@@ -2,7 +2,7 @@
   <div class="column">
     <div class="profile-box">
       <img [src]="userImg" alt="an image of Khoa Nguyen" class="profile-img" />
-      <h3 >{{ userName }}</h3>
+      <h3>{{ userName }}</h3>
       <a
         [href]="userProfile"
         type="button"
@@ -11,23 +11,34 @@
         >Open profile on Spotify</a
       >
     </div>
-<hr/>
+
+    <hr />
+
     <div class="dashboard-box">
       <app-carouse-card
-          [artists]="myArtists"
-          carouselId="list"
-          class="artists-box"
-        >
+        [artists]="myArtists"
+        carouselId="list"
+        class="artists-box"
+      >
       </app-carouse-card>
 
       <div class="tracks-box">
-        <app-tracks-table
-            [tracks]="myTracks"
-          >
-        </app-tracks-table>
+        <app-tracks-table [tracks]="myTracks"> </app-tracks-table>
       </div>
     </div>
-<hr/>
 
+    <hr />
+
+    <div class="playlists-box">
+      <h3>My Fave Playlists</h3>
+      <app-playlist-cards class="playlist-cards" [playlists]="myPlaylists">
+      </app-playlist-cards>
+    </div>
+
+    <hr />
+
+    <div>
+      <h3>My Fave Tracks</h3>
+    </div>
   </div>
 </div>

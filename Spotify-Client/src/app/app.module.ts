@@ -12,6 +12,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CarouseCardComponent } from './components/carouse-card/carouse-card.component';
 import { TracksTableComponent } from './components/tracks-table/tracks-table.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { PlaylistCardsComponent } from './components/playlist-cards/playlist-cards.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
     HomePageComponent,
     CarouseCardComponent,
     TracksTableComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    PlaylistCardsComponent
   ],
   imports: [
     BrowserModule,
