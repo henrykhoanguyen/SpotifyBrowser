@@ -13,6 +13,7 @@ import { CarouseCardComponent } from './components/carouse-card/carouse-card.com
 import { TracksTableComponent } from './components/tracks-table/tracks-table.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PlaylistCardsComponent } from './components/playlist-cards/playlist-cards.component';
+import { FaveTracksTableComponent } from './components/fave-tracks-table/fave-tracks-table.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PlaylistCardsComponent } from './components/playlist-cards/playlist-car
     CarouseCardComponent,
     TracksTableComponent,
     AboutPageComponent,
-    PlaylistCardsComponent
+    PlaylistCardsComponent,
+    FaveTracksTableComponent
   ],
   imports: [
     BrowserModule,

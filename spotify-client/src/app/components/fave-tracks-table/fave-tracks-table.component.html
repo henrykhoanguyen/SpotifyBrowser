@@ -1,0 +1,48 @@
+<table class="table table-hover">
+  <!-- <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead> -->
+
+  <!-- **** Wait for tracks to load **** -->
+  <tbody *ngIf="!savedTracks">
+    <tr style="color: white; font-size: larger;">
+      Loading...
+    </tr>
+  </tbody>
+  <!-- ********************************* -->
+
+  <tbody *ngFor="let track of savedTracks">
+    <tr>
+      <td><img [src]="track.album.images[2].url" /></td>
+      <td class="track-info">
+        <h5>
+          <a [href]="track.trackURL" target="blank">{{ track.name }}</a>
+        </h5>
+        <a
+          *ngFor="let artist of track.artists"
+          [href]="artist.external_urls.spotify"
+          target="blank"
+        >
+          {{ artist.name }}
+        </a>
+        &bull;
+        <a [href]="track.album.external_urls.spotify" target="blank">{{ track.album.name }}</a>
+      </td>
+      <td>
+        <a href="">
+          <span class="material-icons">
+            more_horiz
+          </span>
+        </a>
+      </td>
+      <td>
+        {{track.duration}}
+      </td>
+    </tr>
+  </tbody>
+</table>

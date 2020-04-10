@@ -1,3 +1,15 @@
-a{
+a:hover{
   color: white;
+}
+
+a {
+  color: black;
+}
+.table {
+  border-width: none;
+}
+
+thead,
+tbody {
+  border-style: hidden;
 }

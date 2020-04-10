@@ -39,6 +39,7 @@ hr {
   margin-bottom: 5%;
 }
 
+.saved-tracks-box h3,
 .playlists-box h3{
   text-align: center;
 }
@@ -47,4 +48,11 @@ hr {
   display: flex;
   flex-direction: row;
   overflow: scroll;
+  overflow-y: auto;
+}
+
+.saved-tracks-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20% 0 20%;
 }

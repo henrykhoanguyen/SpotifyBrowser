@@ -1,5 +1,5 @@
 <h3>My Top 10 Tracks</h3>
-<table class="table table-dark">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -8,11 +8,20 @@
       <th scope="col">Album</th>
     </tr>
   </thead>
+
+  <!-- **** Wait for tracks to load **** -->
+  <tbody *ngIf="!tracks">
+    <tr style="color: white; font-size: larger;">
+      Loading...
+    </tr>
+  </tbody>
+  <!-- ********************************* -->
+
   <tbody *ngFor="let track of tracks; let i = index">
     <tr>
       <th scope="row">{{ i + 1 }}</th>
       <td>
-        <a [href]="track.trackURL">
+        <a [href]="track.trackURL" target="blank">
           {{ track.name }}
         </a>
       </td>

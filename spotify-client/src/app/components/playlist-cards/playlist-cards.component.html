@@ -1,3 +1,4 @@
+<div *ngIf="!playlists" style="color: white; font-size: larger;">Loading...</div>
 <div *ngFor="let playlist of playlists" style="margin-right: 1%;">
   <div class="card" style="width: 18rem;">
     <img [src]="playlist.playlistImg" class="card-img-top" alt="" />
