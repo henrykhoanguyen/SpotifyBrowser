@@ -19,7 +19,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav navItem">
+    <ul class="navbar-nav navItem justify-content-end">
       <li class="nav-item" *ngFor="let link of links">
         <a
           class="nav-link"
@@ -36,14 +36,18 @@
           >{{ link.linkName }}</a
         >
       </li>
-
+      <form class="form-inline my-2 my-lg-0 ml-2 mr-3 w-50 justify-content-end">
+        <input class="form-control w-100" type="search" placeholder="Search . . ." aria-label="Search">
+        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        <!-- <select class="custom-select">
+          <option>Track</option>
+          <option>Artist</option>
+          <option>Album</option>
+        </select> -->
+      </form>
       <li class="nav-item" *ngIf="isLoggedIn">
         <a class="btn btn-outline-dark" routerLink="logout" (click)="logout()" type="button">Logout</a>
       </li>
     </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
   </div>
 </nav>
