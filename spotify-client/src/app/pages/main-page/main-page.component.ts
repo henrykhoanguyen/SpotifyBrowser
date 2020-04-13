@@ -54,7 +54,7 @@ export class MainPageComponent implements OnInit {
 
     this.spotifyService.getUserSavedTracks().then(tracks => {
       this.mySavedTracks = tracks;
-      console.log('My saved tracks loaded...', this.mySavedTracks);
+      // console.log('My saved tracks loaded...', this.mySavedTracks);
     });
   }
 

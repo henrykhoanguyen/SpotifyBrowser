@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainPageComponent } from '../../pages/main-page/main-page.component';
 import { NavBarService } from '../../services/nav-bar.service';
+import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,10 +10,11 @@ import { NavBarService } from '../../services/nav-bar.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
+  query: string = '';
   links: Array<{ linkName: string; path: string }>;
 
-  constructor(private navbarService: NavBarService, private router: Router) {
+  constructor(private navbarService: NavBarService, private router: Router, private spotifyService: SpotifyService) {
     this.router.config.unshift({ path: 'me', component: MainPageComponent });
   }
 
@@ -28,4 +30,14 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
+  search(event: any): void {
+    // console.log(event.target.value.length);
+    if (event.target.value.length > 0) {
+      this.query = event.target.value;
+      // console.log(this.query);
+      this.spotifyService.search(this.query);
+    } else {
+      this.query = '';
+    }
+  }
 }

@@ -221,5 +221,14 @@ exports.getRecommendations = (req, res, next) => {
 // Search for an Item
 // https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
 exports.search = (req, res, next) => {
-  makeAPIRequest("https://api.spotify.com/v1/search", res);
+  var query = req.params.query;
+  // console.log(query);
+  var params = new URLSearchParams();
+	params.append('q', query);
+  params.append('type', "track,artist,album,playlist");
+  // res.json({
+  //     success: true,
+  //     data: String(params)
+  //   })
+  makeAPIRequest("https://api.spotify.com/v1/search?" + params, res);
 }

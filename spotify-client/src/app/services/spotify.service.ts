@@ -97,4 +97,18 @@ export class SpotifyService {
       }
     });
   }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  search(query: string) {
+    // query = query.replace(' ', '%20');
+    console.log(query);
+    // await this.sleep(3000);
+    return this.sendRequest2Express(`/search/${encodeURIComponent(query)}`).then(results => {
+      console.log(results);
+    });
+  }
+
 }
