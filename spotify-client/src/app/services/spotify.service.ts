@@ -5,6 +5,7 @@ import { ProfileData } from '../data/profile-data';
 import { TrackData } from '../data/track-data';
 import { ArtistData } from '../data/artist-data';
 import { PlaylistData } from '../data/playlist-data';
+import { AlbumData } from '../data/album-data';
 
 @Injectable({
   providedIn: 'root'
@@ -104,10 +105,49 @@ export class SpotifyService {
 
   search(query: string) {
     // query = query.replace(' ', '%20');
-    console.log(query);
+    // console.log(query);
     // await this.sleep(3000);
     return this.sendRequest2Express(`/search/${encodeURIComponent(query)}`).then(results => {
-      console.log(results);
+      // console.log(results);
+      if (results.success) {
+        const datas = results.data;
+        let myArtists;
+        let myTracks;
+        let myAlbums;
+        let myPlaylists;
+
+        if (datas.artists !== undefined) {
+          myArtists = datas.artists.items.map(artist => {
+            return new ArtistData(artist);
+          });
+        }
+
+        if (datas.tracks !== undefined) {
+          myTracks = datas.tracks.items.map(track => {
+            return new TrackData(track);
+          });
+        }
+
+        if (datas.albums !== undefined) {
+          myAlbums = datas.albums.items.map(album => {
+            // console.log(album);
+            return new AlbumData(album);
+          });
+        }
+
+        if (datas.playlists !== undefined) {
+          // console.log(datas.playlists);
+          myPlaylists = datas.playlists.items.map(playlist => {
+            return new PlaylistData(playlist);
+          });
+        }
+        return {
+          myArtists,
+          myTracks,
+          myAlbums,
+          myPlaylists,
+        };
+      }
     });
   }
 

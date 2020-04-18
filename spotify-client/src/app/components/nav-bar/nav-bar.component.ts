@@ -12,6 +12,7 @@ import { SpotifyService } from '../../services/spotify.service';
 export class NavBarComponent implements OnInit {
   isLoggedIn: boolean = false;
   query: string = '';
+  results;
   links: Array<{ linkName: string; path: string }>;
 
   constructor(private navbarService: NavBarService, private router: Router, private spotifyService: SpotifyService) {
@@ -35,9 +36,13 @@ export class NavBarComponent implements OnInit {
     if (event.target.value.length > 0) {
       this.query = event.target.value;
       // console.log(this.query);
-      this.spotifyService.search(this.query);
+      this.spotifyService.search(this.query).then(results => {
+        this.results = results;
+        console.log(results);
+      });
     } else {
       this.query = '';
+      this.results = '';
     }
   }
 }

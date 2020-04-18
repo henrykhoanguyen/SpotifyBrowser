@@ -38,22 +38,26 @@
       </li>
       <form
         class="form-inline my-2 my-lg-0 ml-2 mr-3 w-50 justify-content-end"
+        *ngIf="isLoggedIn"
       >
-          <input
-            class="form-control w-100"
-            type="text"
-            placeholder="Search . . ."
-            aria-label="Search"
-            [value]="query"
-            (keyup)="search($event)"
-          />
-        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-        <!-- <select class="custom-select">
-          <option>Track</option>
-          <option>Artist</option>
-          <option>Album</option>
-        </select> -->
-        <!-- TODO: implement ng-keyUp -->
+        <input
+          class="form-control w-100"
+          type="text"
+          placeholder="Search . . ."
+          aria-label="Search"
+          [value]="query"
+          (keyup)="search($event)"
+        />
+        <!-- *ngIf="results" -->
+        <table *ngIf="results" class="table">
+          <tbody class="autocomplete-item">
+            <tr>
+              <td *ngFor="let artist of results.myArtists">
+                <a [href]="artist.artistProfile">{{artist.name}}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </form>
       <li class="nav-item" *ngIf="isLoggedIn">
         <a

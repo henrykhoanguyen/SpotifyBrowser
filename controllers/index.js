@@ -226,6 +226,7 @@ exports.search = (req, res, next) => {
   var params = new URLSearchParams();
 	params.append('q', query);
   params.append('type', "track,artist,album,playlist");
+  params.append('limit', 10);
   // res.json({
   //     success: true,
   //     data: String(params)

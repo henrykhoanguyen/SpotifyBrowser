@@ -9,7 +9,7 @@ export class ArtistData {
     this.name = objectModel['name'];
     this.type = objectModel['type'];
     this.artistProfile = objectModel['external_urls'].spotify;
-    if (objectModel['images']) {
+    if (objectModel['images'].length > 0) {
       this.artistImg = objectModel['images'][0].url;
     } else {
       this.artistImg = '../../assets/user.png';

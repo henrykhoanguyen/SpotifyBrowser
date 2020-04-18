@@ -18,7 +18,7 @@ export class PlaylistData {
     this.type = objectModel['type'];
     this.owner = objectModel['owner'];
     this.playlistURL = objectModel['external_urls'].spotify;
-    if (objectModel['images']) {
+    if (objectModel['images'].length > 0 ) {
       this.playlistImg = objectModel['images'][0].url;
     } else {
       this.playlistImg = '../../assets/playlist.png';

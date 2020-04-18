@@ -8,7 +8,7 @@ export class ProfileData {
     this.name = objectModel['display_name'];
     this.email = objectModel['email'];
     this.userProfile = objectModel['external_urls']['spotify'];
-    if (objectModel['images']) {
+    if (objectModel['images'].length > 0) {
       this.userImg = objectModel['images'][0].url;
     } else {
       this.userImg = '../../assets/user.png';

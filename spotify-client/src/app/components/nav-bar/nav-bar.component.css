@@ -14,3 +14,32 @@
 /* .form-control {
   width: 65%
 } */
+
+.autocomplete-item {
+  border-left: 3px solid white;
+  border-bottom: 2px solid white;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 2%;
+  position: absolute;
+  height: 300px;
+  max-width: 300px;
+  background-image: linear-gradient(#fff, #948977);
+  overflow-y: scroll;
+  overflow-x: visible;
+  z-index: 99;
+}
+
+.autocomplete-item > tr {
+  display: flex;
+  flex-direction: column;
+}
+
+.autocomplete-item > td {
+  color: black;
+}
+
+td > a {
+  display: block;
+  width: 100%;
+  color: black;
+}
