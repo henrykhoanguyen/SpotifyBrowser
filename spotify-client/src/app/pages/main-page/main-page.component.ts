@@ -32,7 +32,7 @@ export class MainPageComponent implements OnInit {
 
     //   console.log('User info loaded...');
     // });
-
+    //
     // this.spotifyService.topArtists().then(artists => {
     //   this.myArtists = artists;
     //   // console.log('Artists info loaded...', this.myArtists);
