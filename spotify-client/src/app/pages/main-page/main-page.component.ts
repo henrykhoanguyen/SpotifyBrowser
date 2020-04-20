@@ -22,6 +22,7 @@ export class MainPageComponent implements OnInit {
   constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
   ngOnInit() {
+    //  TODO: navbar breaks
     this.navbarService.updateNavAfterAuth();
     this.navbarService.updateLoginStatus(true);
 

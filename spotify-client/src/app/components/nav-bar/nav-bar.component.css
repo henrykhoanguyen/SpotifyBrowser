@@ -43,3 +43,7 @@ td > a {
   width: 100%;
   color: black;
 }
+
+td:hover {
+  background-color: #e9e9e9;
+}
