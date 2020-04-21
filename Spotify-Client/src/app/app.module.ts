@@ -34,6 +34,11 @@ import { SinglePageComponent } from './pages/single-page/single-page.component';
     AppRoutingModule,
     HttpClientModule
   ],
+  entryComponents: [
+    MainPageComponent,
+    AboutPageComponent,
+    SinglePageComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

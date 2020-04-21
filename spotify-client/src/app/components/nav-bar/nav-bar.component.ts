@@ -1,6 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainPageComponent } from '../../pages/main-page/main-page.component';
+import { AboutPageComponent } from '../../pages/about-page/about-page.component';
+import { SinglePageComponent } from '../../pages/single-page/single-page.component';
 import { NavBarService } from '../../services/nav-bar.service';
 import { SpotifyService } from '../../services/spotify.service';
 
@@ -16,7 +18,12 @@ export class NavBarComponent implements OnInit {
   links: Array<{ linkName: string; path: string }>;
 
   constructor(private navbarService: NavBarService, private router: Router, private spotifyService: SpotifyService) {
-    this.router.config.unshift({ path: 'me', component: MainPageComponent });
+    this.router.config.unshift(
+      // Change pages dynamically
+      { path: 'me', component: MainPageComponent },
+      { path: 'about', component: AboutPageComponent },
+      { path: 'single', component: SinglePageComponent }
+    );
   }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-about-page',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navbarService: NavBarService) { }
 
   ngOnInit() {
+    this.navbarService.updateNavAfterAuth();
+    this.navbarService.updateLoginStatus(true);
   }
 
 }

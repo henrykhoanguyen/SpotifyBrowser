@@ -6,11 +6,11 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { SinglePageComponent } from './pages/single-page/single-page.component';
 
 const routes: Routes = [
-  { path: 'me', component: MainPageComponent },
+  // { path: 'me', component: MainPageComponent },
   { path: '', component: HomePageComponent },
-  { path: 'home', redirectTo: '', pathMatch: 'full' },
-  { path: 'about', component: AboutPageComponent },
-  { path: 'singe', component: SinglePageComponent }
+  { path: 'home', redirectTo: '', pathMatch: 'full' }
+  // { path: 'about', component: AboutPageComponent },
+  // { path: 'single', component: SinglePageComponent }
 ];
 
 @NgModule({

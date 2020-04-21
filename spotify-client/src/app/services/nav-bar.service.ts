@@ -33,11 +33,13 @@ export class NavBarService {
 
   updateNavAfterAuth() {
     this.removeLink({ linkName: 'Login' });
+    // this.clearAllLinks();
 
-    this.links.push({ linkName: 'Dashboard', path: 'me' });
-    // TODO: make an About page
-    this.links.push({ linkName: 'About', path: 'about' });
-    // console.log(this.links);
+    if (this.links.length < 2) {
+      this.links.push({ linkName: 'Dashboard', path: 'me' });
+      this.links.push({ linkName: 'About', path: 'about' });
+    }
+    console.log(this.links);
   }
 
   removeLink({ linkName }) {
