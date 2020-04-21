@@ -14,6 +14,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PlaylistCardsComponent } from './components/playlist-cards/playlist-cards.component';
 import { FaveTracksTableComponent } from './components/fave-tracks-table/fave-tracks-table.component';
 import { SinglePageComponent } from './pages/single-page/single-page.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermOfUseComponent } from './components/term-of-use/term-of-use.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SinglePageComponent } from './pages/single-page/single-page.component';
     AboutPageComponent,
     PlaylistCardsComponent,
     FaveTracksTableComponent,
-    SinglePageComponent
+    SinglePageComponent,
+    PrivacyPolicyComponent,
+    TermOfUseComponent
   ],
   imports: [
     BrowserModule,

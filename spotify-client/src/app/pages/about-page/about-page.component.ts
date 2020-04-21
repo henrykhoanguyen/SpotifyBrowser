@@ -7,7 +7,8 @@ import { NavBarService } from '../../services/nav-bar.service';
   styleUrls: ['./about-page.component.css']
 })
 export class AboutPageComponent implements OnInit {
-
+  isPolicy = true;
+  isTerm = false;
   constructor(private navbarService: NavBarService) { }
 
   ngOnInit() {

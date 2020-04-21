@@ -39,10 +39,10 @@ export class NavBarComponent implements OnInit {
   }
 
   search(event: any): void {
-    // console.log(event.target.value.length);
+
     if (event.target.value.length > 0) {
       this.query = event.target.value;
-      // console.log(this.query);
+
       this.spotifyService.search(this.query).then(results => {
         this.results = results;
         console.log(results);
