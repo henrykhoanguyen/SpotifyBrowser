@@ -201,7 +201,19 @@ exports.followedArtists = (req, res, next) => {
 // Get a List of Current User's Playlists
 // https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
 exports.getUserPlaylists = (req, res, next) => {
-  makeAPIRequest("https://api.spotify.com/v1/me/playlists", res);
+  // next variable contains endpoint that requests the next 20 playlists.
+  var query = req.params.query || '';
+  // console.log(next);
+  // res.json({
+  //     success: true,
+  //     data: query
+  //   })
+  if (query === 'none') {
+    makeAPIRequest("https://api.spotify.com/v1/me/playlists", res);
+  } else {
+    makeAPIRequest(query, res);
+  }
+  // makeAPIRequest("https://api.spotify.com/v1/me/playlists?" + params, res);
 }
 
 // Get Current User's Saved Tracks
@@ -221,7 +233,7 @@ exports.getRecommendations = (req, res, next) => {
 // Search for an Item
 // https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
 exports.search = (req, res, next) => {
-  var query = req.params.query;
+  var query = req.params.query || '';
   // console.log(query);
   var params = new URLSearchParams();
 	params.append('q', query);

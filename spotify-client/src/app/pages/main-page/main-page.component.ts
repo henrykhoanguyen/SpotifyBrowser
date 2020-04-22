@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 // Services
 import { SpotifyService } from '../../services/spotify.service';
 import { NavBarService } from '../../services/nav-bar.service';
@@ -22,7 +22,6 @@ export class MainPageComponent implements OnInit {
   constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
   ngOnInit() {
-    //  TODO: navbar breaks
     this.navbarService.updateNavAfterAuth();
     this.navbarService.updateLoginStatus(true);
 
@@ -44,10 +43,10 @@ export class MainPageComponent implements OnInit {
     //   // console.log('Tracks info loaded...', this.myTracks);
     // });
 
-    // this.spotifyService.getUserPlaylists().then(playlists => {
-    //   this.myPlaylists = playlists;
-    //   // console.log('Saved playlists loaded...', this.myPlaylists);
-    // });
+    this.spotifyService.getUserPlaylists().then(playlists => {
+      this.myPlaylists = playlists;
+      // console.log('Saved playlists loaded...', this.myPlaylists);
+    });
 
     // // this.spotifyService.myArtists().then(artists => {
     // //   console.log('My followed artists loaded...');
@@ -59,4 +58,19 @@ export class MainPageComponent implements OnInit {
     // });
   }
 
+  @HostListener('scroll', ['$event'])
+  onScroll(event): void {
+    if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth) {
+      console.log('End');
+      // this.offsetNum += 20;
+      // this.getNextPlaylist(this.offsetNum);
+    }
+  }
+
+  getNextPlaylist(offsetNum) {
+    this.spotifyService.getUserPlaylists().then(playlists => {
+      this.myPlaylists = playlists;
+      // console.log('Saved playlists loaded...', this.myPlaylists);
+    });
+  }
 }

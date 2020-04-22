@@ -11,5 +11,4 @@ export class PlaylistCardsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

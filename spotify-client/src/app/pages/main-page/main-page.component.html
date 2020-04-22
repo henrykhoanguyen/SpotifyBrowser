@@ -32,7 +32,7 @@
 
     <div class="playlists-box">
       <h3 style="color:black">My Fave Playlists</h3>
-      <app-playlist-cards class="playlist-cards" [playlists]="myPlaylists">
+      <app-playlist-cards class="playlist-cards" [playlists]="myPlaylists" (scroll)="onScroll($event)">
       </app-playlist-cards>
     </div>
 

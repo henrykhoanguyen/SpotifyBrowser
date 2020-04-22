@@ -12,6 +12,7 @@ import { AlbumData } from '../data/album-data';
 })
 export class SpotifyService {
   private expressBaseUrl = 'http://localhost:5000';
+  private nextPlaylists = 'none';
 
   constructor(private http: HttpClient) {
     console.log('Spotify service initialized...');
@@ -74,11 +75,14 @@ export class SpotifyService {
   }
 
   async getUserPlaylists() {
-    return await this.sendRequest2Express('/getUserPlaylists').then(playlists => {
+    // TODO: getting next kinda works
+    return await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(this.nextPlaylists)}`).then(playlists => {
       if (playlists.success) {
-        return playlists.data.items.map(playlist => {
-          return new PlaylistData(playlist);
-        });
+        console.log(playlists);
+        this.nextPlaylists = playlists.data.next;
+        // return playlists.data.items.map(playlist => {
+        //   return new PlaylistData(playlist);
+        // });
       } else {
         return playlists.success;
       }
