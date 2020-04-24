@@ -202,8 +202,8 @@ exports.followedArtists = (req, res, next) => {
 // https://developer.spotify.com/console/get-current-user-playlists/?limit=&offset=
 exports.getUserPlaylists = (req, res, next) => {
   // next variable contains endpoint that requests the next 20 playlists.
-  var query = req.params.query || '';
-  // console.log(next);
+  const query = req.params.query || '';
+
   // res.json({
   //     success: true,
   //     data: query
@@ -213,6 +213,8 @@ exports.getUserPlaylists = (req, res, next) => {
   } else {
     makeAPIRequest(query, res);
   }
+  // var params = new URLSearchParams();
+  // params.append('limit', limit);
   // makeAPIRequest("https://api.spotify.com/v1/me/playlists?" + params, res);
 }
 

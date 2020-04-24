@@ -12,7 +12,6 @@ import { AlbumData } from '../data/album-data';
 })
 export class SpotifyService {
   private expressBaseUrl = 'http://localhost:5000';
-  private nextPlaylists = 'none';
 
   constructor(private http: HttpClient) {
     console.log('Spotify service initialized...');
@@ -74,15 +73,28 @@ export class SpotifyService {
     });
   }
 
-  async getUserPlaylists() {
-    // TODO: getting next kinda works
-    return await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(this.nextPlaylists)}`).then(playlists => {
+  async getUserPlaylists(request) {
+    // Get total number of playlists that users havem
+    // await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(1)}`).then(playlists => {
+    //   if (playlists.success) {
+    //     this.totalPlaylists = playlists.data.total;
+    //   } else {
+    //     return playlists.success;
+    //   }
+    // });
+
+    return await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(request)}`).then(playlists => {
       if (playlists.success) {
-        console.log(playlists);
-        this.nextPlaylists = playlists.data.next;
-        // return playlists.data.items.map(playlist => {
-        //   return new PlaylistData(playlist);
-        // });
+        // console.log(playlists);
+
+        const getPlaylists = {
+          next: playlists.data.next,
+          // prev: playlists.data.previous,
+          playlistsArr: playlists.data.items.map(playlist => {
+            return new PlaylistData(playlist);
+          })
+        };
+        return getPlaylists;
       } else {
         return playlists.success;
       }
@@ -90,6 +102,13 @@ export class SpotifyService {
   }
 
   async getUserSavedTracks() {
+    // await this.sendRequest2Express(`/getUserSavedTracks/${encodeURIComponent(this.totalTracks)}`).then(tracks => {
+    //   if (tracks.success) {
+    //     this.totalTracks = tracks.data.total;
+    //   } else {
+    //     return tracks.success;
+    //   }
+    // });
     return await this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
       // console.log(tracks.data);
       if (tracks.success) {

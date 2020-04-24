@@ -17,6 +17,7 @@ export class MainPageComponent implements OnInit {
   myTracks; // Top 10 tracks
 
   myPlaylists; // Saved playlists
+  private reqPlaylists = 'none'; // Spotify endpoint to request more playlist
   mySavedTracks; // Saved Tracks
 
   constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
@@ -43,8 +44,12 @@ export class MainPageComponent implements OnInit {
     //   // console.log('Tracks info loaded...', this.myTracks);
     // });
 
-    this.spotifyService.getUserPlaylists().then(playlists => {
-      this.myPlaylists = playlists;
+    this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
+      // this.myPlaylists = playlists;
+      // this.getDisplayPlaylists(playlists);
+      console.log(playlists);
+      this.reqPlaylists = playlists.next;
+      this.myPlaylists = playlists.playlistsArr;
       // console.log('Saved playlists loaded...', this.myPlaylists);
     });
 
@@ -62,14 +67,23 @@ export class MainPageComponent implements OnInit {
   onScroll(event): void {
     if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth) {
       console.log('End');
-      // this.offsetNum += 20;
-      // this.getNextPlaylist(this.offsetNum);
+      this.getDisplayPlaylists();
     }
   }
 
-  getNextPlaylist(offsetNum) {
-    this.spotifyService.getUserPlaylists().then(playlists => {
-      this.myPlaylists = playlists;
+  getDisplayPlaylists() {
+    this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
+      // this.myPlaylists = playlists;
+      // this.getDisplayPlaylists(playlists);
+      console.log(playlists);
+
+      // TODO: FIX!! next is broken for the last new playlists!
+      if (this.reqPlaylists !== null) {
+        this.reqPlaylists = playlists.next;
+        this.myPlaylists = this.myPlaylists.concat(playlists.playlistsArr);
+      } else {
+        console.log('No more items!');
+      }
       // console.log('Saved playlists loaded...', this.myPlaylists);
     });
   }
