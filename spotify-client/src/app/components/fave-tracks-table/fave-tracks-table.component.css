@@ -11,7 +11,7 @@ a {
   color: black;
 }
 
-.table{
+/* .table{
   height: 600px;
   display: -webkit-box;
   overflow: auto;
@@ -20,7 +20,7 @@ a {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   background-color: darkgray;
-}
+} */
 
 .track-info {
   width: 40em;

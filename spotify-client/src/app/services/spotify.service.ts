@@ -74,14 +74,6 @@ export class SpotifyService {
   }
 
   async getUserPlaylists(request) {
-    // Get total number of playlists that users havem
-    // await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(1)}`).then(playlists => {
-    //   if (playlists.success) {
-    //     this.totalPlaylists = playlists.data.total;
-    //   } else {
-    //     return playlists.success;
-    //   }
-    // });
 
     return await this.sendRequest2Express(`/getUserPlaylists/${encodeURIComponent(request)}`).then(playlists => {
       if (playlists.success) {
@@ -101,21 +93,19 @@ export class SpotifyService {
     });
   }
 
-  async getUserSavedTracks() {
-    // await this.sendRequest2Express(`/getUserSavedTracks/${encodeURIComponent(this.totalTracks)}`).then(tracks => {
-    //   if (tracks.success) {
-    //     this.totalTracks = tracks.data.total;
-    //   } else {
-    //     return tracks.success;
-    //   }
-    // });
-    return await this.sendRequest2Express('/getUserSavedTracks').then(tracks => {
-      // console.log(tracks.data);
+  async getUserSavedTracks(request) {
+
+    return await this.sendRequest2Express(`/getUserSavedTracks/${encodeURIComponent(request)}`).then(tracks => {
+      console.log(tracks.data);
       if (tracks.success) {
-        return tracks.data.items.map(track => {
-          // console.log(track.track);
-          return new TrackData(track.track);
-        });
+        const getTracks = {
+          next: tracks.data.next,
+          tracksArr: tracks.data.items.map(track => {
+            // console.log(track.track);
+            return new TrackData(track.track);
+          })
+        };
+        return getTracks;
       } else {
         return tracks.success;
       }

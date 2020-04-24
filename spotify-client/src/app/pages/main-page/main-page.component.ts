@@ -10,15 +10,18 @@ import { NavBarService } from '../../services/nav-bar.service';
 })
 export class MainPageComponent implements OnInit {
   userImg = '../../../assets/user.png';
-  userName = 'Loading...';
+  userName = 'Loading . . .';
   userProfile = '#';
 
   myArtists; // Top 10 artists
   myTracks; // Top 10 tracks
 
   myPlaylists; // Saved playlists
-  private reqPlaylists = 'none'; // Spotify endpoint to request more playlist
   mySavedTracks; // Saved Tracks
+
+  private reqPlaylists = 'none'; // Spotify endpoint to request more saved playlist
+  private reqTracks = 'none'; // Spotify endpoint to request more saved tracks
+
 
   constructor(private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
@@ -26,65 +29,88 @@ export class MainPageComponent implements OnInit {
     this.navbarService.updateNavAfterAuth();
     this.navbarService.updateLoginStatus(true);
 
-    // this.spotifyService.aboutMe().then(data => {
-    //   this.userImg = data.userImg;
-    //   this.userName = data.name;
-    //   this.userProfile = data.userProfile;
+    /**** Get User's Info and URL to their profile ****/
+    this.spotifyService.aboutMe().then(data => {
+      this.userImg = data.userImg;
+      this.userName = data.name;
+      this.userProfile = data.userProfile;
 
-    //   console.log('User info loaded...');
-    // });
-    //
-    // this.spotifyService.topArtists().then(artists => {
-    //   this.myArtists = artists;
-    //   // console.log('Artists info loaded...', this.myArtists);
-    // });
+      console.log('User info loaded...');
+    });
 
-    // this.spotifyService.topTracks().then(tracks => {
-    //   this.myTracks = tracks;
-    //   // console.log('Tracks info loaded...', this.myTracks);
-    // });
+    /**** Get User's Most Favorite Artists ****/
+    this.spotifyService.topArtists().then(artists => {
+      this.myArtists = artists;
+      // console.log('Artists info loaded...', this.myArtists);
+    });
 
+    /**** Get User's Most Favorite Tracks ****/
+    this.spotifyService.topTracks().then(tracks => {
+      this.myTracks = tracks;
+      // console.log('Tracks info loaded...', this.myTracks);
+    });
+
+    /**** Get All User's Saved Playlist ****/
     this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
-      // this.myPlaylists = playlists;
-      // this.getDisplayPlaylists(playlists);
-      console.log(playlists);
+
       this.reqPlaylists = playlists.next;
       this.myPlaylists = playlists.playlistsArr;
       // console.log('Saved playlists loaded...', this.myPlaylists);
     });
 
+    /**** Get 100 of User's Most Recent Saved Tracks ****/
+    this.spotifyService.getUserSavedTracks(this.reqTracks).then(tracks => {
+
+      this.reqTracks = tracks.next;
+      this.mySavedTracks = tracks.tracksArr;
+      // console.log('My saved tracks loaded...', this.mySavedTracks);
+    });
+
     // // this.spotifyService.myArtists().then(artists => {
     // //   console.log('My followed artists loaded...');
     // // });
-
-    // this.spotifyService.getUserSavedTracks().then(tracks => {
-    //   this.mySavedTracks = tracks;
-    //   // console.log('My saved tracks loaded...', this.mySavedTracks);
-    // });
   }
 
   @HostListener('scroll', ['$event'])
-  onScroll(event): void {
+  onPlaylistScroll(event): void {
     if (event.target.offsetWidth + event.target.scrollLeft >= event.target.scrollWidth) {
-      console.log('End');
+      console.log('End of playlists...');
       this.getDisplayPlaylists();
     }
   }
 
   getDisplayPlaylists() {
-    this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
-      // this.myPlaylists = playlists;
-      // this.getDisplayPlaylists(playlists);
-      console.log(playlists);
+    if (this.reqPlaylists !== null) {
+      this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
 
-      // TODO: FIX!! next is broken for the last new playlists!
-      if (this.reqPlaylists !== null) {
+        // console.log(playlists);
+
         this.reqPlaylists = playlists.next;
         this.myPlaylists = this.myPlaylists.concat(playlists.playlistsArr);
-      } else {
-        console.log('No more items!');
-      }
-      // console.log('Saved playlists loaded...', this.myPlaylists);
-    });
+        // console.log('Saved playlists loaded...', this.myPlaylists);
+      });
+    } else {
+      console.log('No more playlists to load...');
+    }
+  }
+
+  @HostListener('scroll', ['$event'])
+  onTracksListScroll(event): void {
+
+    if (event.target.clientHeight + event.target.scrollTop >= event.target.scrollHeight) {
+      console.log('End of tracks list...');
+      this.getMoreTracks();
+    }
+  }
+
+  getMoreTracks() {
+    if (this.reqTracks !== null && this.mySavedTracks.length !== 100) {
+      this.spotifyService.getUserSavedTracks(this.reqTracks).then(tracks => {
+        this.reqTracks = tracks.next;
+        this.mySavedTracks = this.mySavedTracks.concat(tracks.tracksArr);
+      });
+    } else {
+      console.log('No more items to load...')
+    }
   }
 }

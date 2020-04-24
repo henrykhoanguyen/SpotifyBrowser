@@ -56,3 +56,14 @@ hr {
   flex-direction: column;
   padding: 0 20% 0 20%;
 }
+
+.tracks-list{
+  height: 600px;
+  display: -webkit-box;
+  overflow: auto;
+  overflow-x: auto;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  background-color: darkgray;
+}

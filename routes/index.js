@@ -26,7 +26,7 @@ router.route("/topTracks").get(topTracks);
 
 router.route("/followedArtists").get(followedArtists);
 router.route("/getUserPlaylists/:query").get(getUserPlaylists);
-router.route("/getUserSavedTracks").get(getUserSavedTracks);
+router.route("/getUserSavedTracks/:query").get(getUserSavedTracks);
 
 // This require seeds: artist id, genres, and tracks
 router.route("/recommendations").get(getRecommendations);

@@ -221,7 +221,13 @@ exports.getUserPlaylists = (req, res, next) => {
 // Get Current User's Saved Tracks
 // https://developer.spotify.com/console/get-current-user-saved-tracks/
 exports.getUserSavedTracks = (req, res, next) => {
-  makeAPIRequest("https://api.spotify.com/v1/me/tracks", res);
+  const query = req.params.query || '';
+  // console.log(query);
+  if (query === 'none') {
+    makeAPIRequest("https://api.spotify.com/v1/me/tracks", res);
+  } else {
+    makeAPIRequest(query, res);
+  }
 }
 
 // Get Recommendations Based on Seeds

@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover mt-3">
   <!-- <thead>
     <tr>
       <th scope="col">#</th>
@@ -10,8 +10,8 @@
 
   <!-- **** Wait for tracks to load **** -->
   <tbody *ngIf="!savedTracks">
-    <tr style="color: white; font-size: larger;">
-      Loading...
+    <tr style="font-size: larger;" class="text-white text-center">
+      Loading . . .
     </tr>
   </tbody>
   <!-- ********************************* -->
@@ -44,5 +44,8 @@
         {{track.duration}}
       </td>
     </tr>
+  </tbody>
+  <tbody *ngIf="savedTracks && savedTracks.length !== 100" class="text-center font-weight-bold text-white">
+    Loading...
   </tbody>
 </table>

@@ -39,7 +39,7 @@ export class NavBarService {
       this.links.push({ linkName: 'Dashboard', path: 'me' });
       this.links.push({ linkName: 'About', path: 'about' });
     }
-    console.log(this.links);
+    // console.log(this.links);
   }
 
   removeLink({ linkName }) {
