@@ -1,8 +1,90 @@
 <div class="container" *ngIf="data">
-  <div *ngIf="data.type === 'track'" class="track-display">
-    <div>
+  <!-- Track's Display -->
+  <div *ngIf="data.type === 'track'" class="track-display mb-3 mt-3">
+    <img [src]="data.album.images[0].url" [alt]="data.name" class="w-25"/>
+
+    <div class="track-detail">
+      <h3>{{ data.name }}</h3>
+      <table class="mb-2">
+        <tbody>
+          <tr>
+            <td style="padding-right: 5em;">Duration:</td>
+            <td>{{ data.duration }} minutes</td>
+          </tr>
+          <tr>
+            <td>Artists:</td>
+            <td>
+              <div
+                *ngFor="let artist of data.artists"
+                style="display: contents;"
+              >
+                {{ artist.name }},
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Album:</td>
+            <td>{{ data.album.name }}</td>
+          </tr>
+          <tr>
+            <td>Date:</td>
+            <td>{{ data.album.release_date }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <a
+          [href]="data.trackURL"
+          type="button"
+          class="btn btn-primary mr-2"
+          target="blank"
+          >Visit Track</a
+        >
+        <a
+          [href]="data.album.external_urls.spotify"
+          type="button"
+          class="btn btn-primary mr-2"
+          target="blank"
+          >Visit Album</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Album's Display -->
+  <div *ngIf="data.type === 'album'" class="album-display mb-3 mt-3">
+    <img [src]="data.albumImg" [alt]="data.name" class="w-25"/>
+    <div class="album-detail">
       <h3>{{data.name}}</h3>
-      <img [src]="data.album.images[0]" alt="">
+      <table class="mb-2">
+        <tbody>
+          <tr>
+            <td>Number of Tracks:</td>
+            <td>
+            {{data.num_tracks}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Release Date:
+            </td>
+            <td>
+              {{data.release_date}}
+            </td>
+          </tr>
+          <tr>
+            <td>Artists:</td>
+            <td>
+              <div
+                *ngFor="let artist of data.artists"
+                style="display: contents;"
+              >
+                {{ artist.name }},
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

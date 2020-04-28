@@ -1,0 +1,13 @@
+.track-display,
+.album-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.track-detail {
+  margin-left: 2%;
+  display: inherit;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

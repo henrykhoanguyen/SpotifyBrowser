@@ -17,6 +17,7 @@ body {
   background-repeat: no-repeat;
   font-family: Poppins, sans-serif;
   color: white;
+  min-height: 100%;
 }
 
 @media screen and (max-width: 720px) {

@@ -2,4 +2,5 @@ main {
   margin: auto;
   padding-top: 10px;
   height: 100%;
+  min-height: 100%;
 }
