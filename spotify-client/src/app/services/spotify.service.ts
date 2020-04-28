@@ -96,7 +96,7 @@ export class SpotifyService {
   async getUserSavedTracks(request) {
 
     return await this.sendRequest2Express(`/getUserSavedTracks/${encodeURIComponent(request)}`).then(tracks => {
-      console.log(tracks.data);
+      // console.log(tracks.data);
       if (tracks.success) {
         const getTracks = {
           next: tracks.data.next,
@@ -112,6 +112,29 @@ export class SpotifyService {
     });
   }
 
+  async getSingle(id: string, type: string) {
+    return await this.sendRequest2Express(`/single/${encodeURIComponent(type)}/${encodeURIComponent(id)}`).then(result => {
+      if (result.success) {
+        switch (type) {
+          case 'artists':
+            console.log(result);
+            return new ArtistData(result.data);
+            // break;
+          case 'tracks':
+            console.log(result);
+            return new TrackData(result.data);
+            // break;
+          case 'albums':
+            console.log(result);
+            return new AlbumData(result.data);
+            // break;
+          default:
+            console.log('No result found');
+            return null;
+        }
+      }
+    });
+  }
 
   search(query: string) {
 
@@ -119,31 +142,31 @@ export class SpotifyService {
       // console.log(results);
       if (results.success) {
         const datas = results.data;
-        let searchArtists;
-        let searchTracks;
-        let searchAlbums;
-        let searchPlaylists;
+        let searchArtists = null;
+        let searchTracks = null;
+        let searchAlbums = null;
+        let searchPlaylists = null;
 
-        if (datas.artists !== undefined) {
+        if (datas.artists !== undefined && datas.artists.items.length !== 0) {
           searchArtists = datas.artists.items.map(artist => {
             return new ArtistData(artist);
           });
         }
 
-        if (datas.tracks !== undefined) {
+        if (datas.tracks !== undefined && datas.tracks.items.length !== 0) {
           searchTracks = datas.tracks.items.map(track => {
             return new TrackData(track);
           });
         }
 
-        if (datas.albums !== undefined) {
+        if (datas.albums !== undefined && datas.albums.items.length !== 0) {
           searchAlbums = datas.albums.items.map(album => {
             // console.log(album);
             return new AlbumData(album);
           });
         }
 
-        if (datas.playlists !== undefined) {
+        if (datas.playlists !== undefined && datas.playlists.items.length !== 0) {
           // console.log(datas.playlists);
           searchPlaylists = datas.playlists.items.map(playlist => {
             return new PlaylistData(playlist);

@@ -49,26 +49,29 @@
           (keyup)="search($event)"
         />
         <!-- *ngIf="results" -->
-        <table *ngIf="results" class="table">
-          <tbody class="autocomplete-item">
-            <tr>
-              <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;">Artists</h5>
-              <td *ngFor="let artist of results.searchArtists">
-                <a [href]="artist.artistProfile" target="blank">{{artist.name}}</a>
-              </td>
+        <div *ngIf="results" style="display:contents">
+          <table *ngIf="results.searchArtists && results.searchTracks && results.searchAlbums" class="table">
+            <tbody class="autocomplete-item">
+              <tr>
+                <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;">Artists</h5>
+                <td *ngFor="let artist of results.searchArtists">
+                  <a href="single/artists/{{artist.artistId}}">{{artist.name}}</a>
+                </td>
 
-              <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;" >Tracks</h5>
-              <td *ngFor="let track of results.searchTracks">
-                <a [href]="track.trackURL" target="blank">{{track.name}}</a>
-              </td>
+                <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;" >Tracks</h5>
+                <td *ngFor="let track of results.searchTracks">
+                  <a href="single/tracks/{{track.trackId}}">{{track.name}}</a>
+                </td>
 
-              <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;">Albums</h5>
-              <td *ngFor="let album of results.searchAlbums">
-                <a [href]="album.albumURL" target="blank">{{album.name}}</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                <h5 style="margin: auto; margin-top:.5em; margin-bottom: .5em;">Albums</h5>
+                <td *ngFor="let album of results.searchAlbums">
+                  <a href="single/albums/{{album.albumId}}">{{album.name}}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </form>
       <li class="nav-item" *ngIf="isLoggedIn">
         <a

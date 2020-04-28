@@ -253,3 +253,16 @@ exports.search = (req, res, next) => {
   //   })
   makeAPIRequest("https://api.spotify.com/v1/search?" + params, res);
 }
+
+// Search for artist, track, or album using Id
+exports.getSingle = (req, res, next) => {
+  const id = req.params.id || '';
+  const type = req.params.type || '';
+
+  // res.json({
+  //   success: true,
+  //   data:  type + "/" + id
+  // });
+  
+  makeAPIRequest("https://api.spotify.com/v1/" + type + "/" + id, res);
+}

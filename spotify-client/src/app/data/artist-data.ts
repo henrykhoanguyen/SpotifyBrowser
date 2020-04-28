@@ -3,12 +3,14 @@ export class ArtistData {
   type: string; // object type: artist
   artistProfile: string; // link to artist profile
   artistImg: string; // artist profile image
+  artistId: string;
   genres: [];
 
   constructor(objectModel: {}) {
     this.name = objectModel['name'];
     this.type = objectModel['type'];
     this.artistProfile = objectModel['external_urls'].spotify;
+    this.artistId = objectModel['id'];
     if (objectModel['images'].length > 0) {
       this.artistImg = objectModel['images'][0].url;
     } else {

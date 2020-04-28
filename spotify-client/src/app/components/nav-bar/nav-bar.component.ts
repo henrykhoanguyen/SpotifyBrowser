@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
       // Change pages dynamically
       { path: 'me', component: MainPageComponent },
       { path: 'about', component: AboutPageComponent },
-      { path: 'single', component: SinglePageComponent }
+      { path: 'single/:type/:id', component: SinglePageComponent }
     );
   }
 
