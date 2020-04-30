@@ -7,8 +7,7 @@ export class PlaylistData {
   playlistURL: string;  // link to playlist
   type: string;         // type of object
   tracks: {};           // tracks info of playlist
-  // TODO: implement 'next' request for backend to retrieve next 20 playlists.
-  next: string;         // request the next 20 playlists
+
 
   constructor(objectModel: {}) {
     // const data = objectModel['items'];

@@ -44,8 +44,9 @@ export class NavBarComponent implements OnInit {
       this.query = event.target.value;
 
       this.spotifyService.search(this.query).then(results => {
+        // console.log(results);
+
         this.results = results;
-        console.log(results);
       });
     } else {
       this.query = '';

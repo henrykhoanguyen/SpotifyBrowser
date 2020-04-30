@@ -5,8 +5,10 @@
   justify-content: space-evenly;
 }
 
+.album-detail,
 .track-detail {
   margin-left: 2%;
+  width: 50%;
   display: inherit;
   flex-direction: column;
   justify-content: space-evenly;

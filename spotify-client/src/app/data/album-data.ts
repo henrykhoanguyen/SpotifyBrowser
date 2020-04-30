@@ -7,6 +7,7 @@ export class AlbumData {
   albumImg: string;     // Album's cover image
   release_date: string; // Album's release date
   num_tracks: number;   // Number of track in album
+  tracks: any[];
 
   constructor(objectModel: {}) {
     this.name = objectModel['name'];
@@ -21,5 +22,9 @@ export class AlbumData {
     }
     this.release_date = objectModel['release_date'];
     this.num_tracks = objectModel['total_tracks'];
+
+    if (objectModel['tracks']) {
+      this.tracks = [...objectModel['tracks'].items];
+    }
   }
 }
