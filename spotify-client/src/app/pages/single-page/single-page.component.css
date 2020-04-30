@@ -13,3 +13,12 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+a {
+  color: #212529;
+  font-weight: bold;
+}
+
+#artists-title {
+  font-size: small;
+}

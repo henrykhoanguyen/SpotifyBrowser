@@ -23,6 +23,7 @@
         <h5>
           <a [href]="track.trackURL" target="blank">{{ track.name }}</a>
         </h5>
+        <!-- <span [innerHTML]='track.artists'></span> -->
         <a
           *ngFor="let artist of track.artists"
           [href]="artist.external_urls.spotify"

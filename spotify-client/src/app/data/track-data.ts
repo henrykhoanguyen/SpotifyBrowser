@@ -13,7 +13,9 @@ export class TrackData {
     this.type = objectModel['type'];
     this.artists = objectModel['artists'];
     this.trackURL = objectModel['external_urls'].spotify;
-    this.album = objectModel['album'];
+    if (objectModel['album']){
+      this.album = objectModel['album'];
+    }
     this.duration = this.getDuration(objectModel['duration_ms']);
   }
 

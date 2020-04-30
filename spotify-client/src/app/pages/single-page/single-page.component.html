@@ -1,4 +1,4 @@
-<div class="container" *ngIf="data">
+<div class="container-fluid" *ngIf="data">
   <!-- Track's Display -->
   <div *ngIf="data.type === 'track'" class="track-display mb-3 mt-3">
     <img [src]="data.album.images[0].url" [alt]="data.name" class="w-25"/>
@@ -22,7 +22,7 @@
           </tr>
           <tr>
             <td>Album:</td>
-            <td><a href="data.album.external_urls.spotify">{{ data.album.name }}</a></td>
+            <td><a [href]="data.album.external_urls.spotify">{{ data.album.name }}</a></td>
           </tr>
           <tr>
             <td>Date:</td>
@@ -51,16 +51,16 @@
 
   <!-- Album's Display -->
   <div *ngIf="data.type === 'album'" class="album-display mb-3 mt-3">
-    <img [src]="data.albumImg" [alt]="data.name" class="w-25"/>
+    <img [src]="data.albumImg" [alt]="data.name" class="w-25 h-25"/>
     <div class="album-detail">
       <h3>{{data.name}}</h3>
       <p>
-        {{data.name}} was released on {{data.release_date}}. This album is a collaboration between
+        {{data.name}} was released on {{releaseDate}}. This album is a collaboration between
         <span [innerHTML]='artists'></span>
         with {{data.num_tracks}} tracks made available for listener. We hope you enjoy!
       </p>
 
-      <table class="mb-2">
+      <table class="mb-2 table">
         <thead>
           <tr>
             <th>#</th>
@@ -69,12 +69,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-
+          <tr *ngFor="let track of tracks; let i = index">
+            <th>{{i + 1}}</th>
+            <th>
+              <a [href]="track.trackURL" target="blank"> {{track.name}}</a>
+              <div id="artists-title" [innerHTML]="track.artists"></div>
+            </th>
+            <th>{{track.duration}}</th>
           </tr>
         </tbody>
       </table>
-
 
       <div>
         <a
