@@ -91,4 +91,37 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="data.type === 'artist'" class="artist-display mb-3 mt-3">
+    <img [src]="data.artistImg" [alt]="data.name" class="w-25 h-25"/>
+    <div class="artist-detail">
+      <h3>{{data.name}}</h3>
+      <p>
+        This week, {{data.name}} is currently rank {{data.popularity}} on Spotify's popularity chart. Past years, there are {{data.followers}} listeners tune in and follow {{data.name}}. We hope you find these information useful.
+      </p>
+      <div>
+        <a
+        [href]="data.artistProfile"
+        type="button"
+        class="btn btn-primary mr-2 mb-3"
+        target="blank"
+        >Visit Artist Profile</a
+      >
+      </div>
+
+      <h5>Artist's Top 10 Tracks</h5>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let track of tracks; let i = index">
+            <th>{{i + 1}}</th>
+            <th>
+              <a [href]="track.trackURL" target="blank"> {{track.name}}</a>
+              <div id="artists-title" [innerHTML]="track.artists"></div>
+            </th>
+            <th>{{track.duration}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

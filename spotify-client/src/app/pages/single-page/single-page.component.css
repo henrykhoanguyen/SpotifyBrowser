@@ -1,17 +1,26 @@
 .track-display,
-.album-display {
+.album-display,
+.artist-display {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
 .album-detail,
-.track-detail {
+.track-detail{
   margin-left: 2%;
   width: 50%;
   display: inherit;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.artist-detail {
+  margin-left: 2%;
+  width: 50%;
+  display: inherit;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 a {

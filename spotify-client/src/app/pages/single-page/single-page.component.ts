@@ -22,8 +22,8 @@ export class SinglePageComponent implements OnInit {
 
   // Public variable to be bind
   releaseDate;
-  artists: string;      // artists of a track
-  tracks = [];       // tracks detail in an album
+  artists: string;    // artists of a track
+  tracks = [];        // tracks detail in an album
 
   private pipe = new DatePipe('en-US');
 
@@ -37,14 +37,14 @@ export class SinglePageComponent implements OnInit {
       if (result) {
         this.data = result;
 
-        if (result.type === 'track') {
+        if (this.type === 'track') {
           // Get formatted date
           this.releaseDate = this.pipe.transform(result['album'].release_date, 'fullDate');
           // Get artist(s) that worked on a track
           this.artists = this.getArtists(result['artists']);
         }
 
-        if (result.type === 'album') {
+        if (this.type === 'album') {
           // Get formatted date
           this.releaseDate = this.pipe.transform(result['release_date'], 'fullDate');
           // Get artist(s) that works on an album
@@ -57,13 +57,25 @@ export class SinglePageComponent implements OnInit {
           });
           this.tracks.forEach(track => {
             track.artists = this.getArtists(track.artists);
-          })
+          });
           console.log(this.tracks);
         }
         // console.log(this.artists, this.releaseDate);
       }
 
     });
+
+    if (this.type === 'artists') {
+      this.spotifyService.getArtistTopTracks(this.id).then(tracks => {
+        this.tracks = tracks;
+        this.tracks.forEach(track => {
+          track.artists = this.getArtists(track.artists);
+        });
+
+        console.log(this.tracks);
+
+      });
+    }
   }
 
   private getArtists(artists): string {

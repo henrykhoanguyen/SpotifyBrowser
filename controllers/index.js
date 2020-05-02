@@ -266,3 +266,9 @@ exports.getSingle = (req, res, next) => {
   
   makeAPIRequest("https://api.spotify.com/v1/" + type + "/" + id, res);
 }
+
+exports.getArtistTopTracks = (req, res, next) => {
+  const id = req.params.id || '';
+
+  makeAPIRequest("https://api.spotify.com/v1/artists/" + id + "/top-tracks?country=US", res);
+}

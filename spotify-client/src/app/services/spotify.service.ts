@@ -136,6 +136,17 @@ export class SpotifyService {
     });
   }
 
+  async getArtistTopTracks(id: string) {
+    return await this.sendRequest2Express(`/getArtistTopTracks/${encodeURIComponent(id)}`).then(results => {
+      if (results.success) {
+        return results.data.tracks.map(track => {
+          // console.log(track);
+          return new TrackData(track);
+        });
+      }
+    });
+  }
+
   search(query: string) {
 
     return this.sendRequest2Express(`/search/${encodeURIComponent(query)}`).then(results => {
