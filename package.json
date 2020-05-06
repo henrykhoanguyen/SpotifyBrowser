@@ -7,8 +7,9 @@
     "start": "NODE_ENV=production node server",
     "client-install": "npm install --prefix spotify-client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "npm start --prefix Spotify-Client",
-    "server": "nodemon server.js"
+    "client": "npm start --prefix spotify-client",
+    "server": "nodemon server.js",
+    "heroku-postbuild": "cd spotify-client && npm install"
   },
   "repository": {
     "type": "git",
