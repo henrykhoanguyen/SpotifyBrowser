@@ -2946,8 +2946,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function SpotifyService(http) {
         _classCallCheck(this, SpotifyService);
 
-        this.http = http;
-        this.expressBaseUrl = 'http://localhost:5000';
+        this.http = http; // private expressBaseUrl = 'http://localhost:5000';
+
+        this.expressBaseUrl = '';
         console.log('Spotify service initialized...');
       }
 

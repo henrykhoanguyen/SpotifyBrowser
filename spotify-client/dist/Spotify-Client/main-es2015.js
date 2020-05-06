@@ -1666,7 +1666,8 @@ __webpack_require__.r(__webpack_exports__);
 let SpotifyService = class SpotifyService {
     constructor(http) {
         this.http = http;
-        this.expressBaseUrl = 'http://localhost:5000';
+        // private expressBaseUrl = 'http://localhost:5000';
+        this.expressBaseUrl = '';
         console.log('Spotify service initialized...');
     }
     sendRequest2Express(endpoint) {
