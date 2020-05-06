@@ -10,7 +10,7 @@ export class NavBarService {
   private isLoggedIn = new Subject<boolean>();
 
   constructor() {
-    this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'});
+    this.links.push({linkName: 'Login', path: '/login'});
     this.isLoggedIn.next(false);
   }
 
@@ -27,7 +27,7 @@ export class NavBarService {
     // console.log(status);
     if (!status) {
       this.clearAllLinks();
-      this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'});
+      this.links.push({linkName: 'Login', path: '/login'});
     }
   }
 

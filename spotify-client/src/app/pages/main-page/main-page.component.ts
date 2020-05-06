@@ -38,37 +38,37 @@ export class MainPageComponent implements OnInit {
       console.log('User info loaded...');
     });
 
-    // /**** Get User's Most Favorite Artists ****/
-    // this.spotifyService.topArtists().then(artists => {
-    //   this.myArtists = artists;
-    //   // console.log('Artists info loaded...', this.myArtists);
-    // });
+    /**** Get User's Most Favorite Artists ****/
+    this.spotifyService.topArtists().then(artists => {
+      this.myArtists = artists;
+      // console.log('Artists info loaded...', this.myArtists);
+    });
 
-    // /**** Get User's Most Favorite Tracks ****/
-    // this.spotifyService.topTracks().then(tracks => {
-    //   this.myTracks = tracks;
-    //   // console.log('Tracks info loaded...', this.myTracks);
-    // });
+    /**** Get User's Most Favorite Tracks ****/
+    this.spotifyService.topTracks().then(tracks => {
+      this.myTracks = tracks;
+      // console.log('Tracks info loaded...', this.myTracks);
+    });
 
-    // /**** Get All User's Saved Playlist ****/
-    // this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
+    /**** Get All User's Saved Playlist ****/
+    this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
 
-    //   this.reqPlaylists = playlists.next;
-    //   this.myPlaylists = playlists.playlistsArr;
-    //   // console.log('Saved playlists loaded...', this.myPlaylists);
-    // });
+      this.reqPlaylists = playlists.next;
+      this.myPlaylists = playlists.playlistsArr;
+      // console.log('Saved playlists loaded...', this.myPlaylists);
+    });
 
-    // /**** Get 100 of User's Most Recent Saved Tracks ****/
-    // this.spotifyService.getUserSavedTracks(this.reqTracks).then(tracks => {
-    //   this.reqTracks = tracks.next;
-    //   // this.mySavedTracks = tracks.tracksArr;
-    //   // tracks.tracksArr.forEach(track => {
-    //   //   track.artists = this.getArtists(track.artists);
-    //   // });
-    //   this.mySavedTracks = tracks.tracksArr;
+    /**** Get 100 of User's Most Recent Saved Tracks ****/
+    this.spotifyService.getUserSavedTracks(this.reqTracks).then(tracks => {
+      this.reqTracks = tracks.next;
+      // this.mySavedTracks = tracks.tracksArr;
+      // tracks.tracksArr.forEach(track => {
+      //   track.artists = this.getArtists(track.artists);
+      // });
+      this.mySavedTracks = tracks.tracksArr;
 
-    //   console.log('My saved tracks loaded...', this.mySavedTracks);
-    // });
+      console.log('My saved tracks loaded...', this.mySavedTracks);
+    });
 
     // // this.spotifyService.myArtists().then(artists => {
     // //   console.log('My followed artists loaded...');

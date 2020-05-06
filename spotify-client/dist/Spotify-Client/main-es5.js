@@ -2434,33 +2434,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _this3.userName = data.name;
             _this3.userProfile = data.userProfile;
             console.log('User info loaded...');
-          }); // /**** Get User's Most Favorite Artists ****/
-          // this.spotifyService.topArtists().then(artists => {
-          //   this.myArtists = artists;
-          //   // console.log('Artists info loaded...', this.myArtists);
-          // });
-          // /**** Get User's Most Favorite Tracks ****/
-          // this.spotifyService.topTracks().then(tracks => {
-          //   this.myTracks = tracks;
-          //   // console.log('Tracks info loaded...', this.myTracks);
-          // });
-          // /**** Get All User's Saved Playlist ****/
-          // this.spotifyService.getUserPlaylists(this.reqPlaylists).then(playlists => {
-          //   this.reqPlaylists = playlists.next;
-          //   this.myPlaylists = playlists.playlistsArr;
-          //   // console.log('Saved playlists loaded...', this.myPlaylists);
-          // });
-          // /**** Get 100 of User's Most Recent Saved Tracks ****/
-          // this.spotifyService.getUserSavedTracks(this.reqTracks).then(tracks => {
-          //   this.reqTracks = tracks.next;
-          //   // this.mySavedTracks = tracks.tracksArr;
-          //   // tracks.tracksArr.forEach(track => {
-          //   //   track.artists = this.getArtists(track.artists);
-          //   // });
-          //   this.mySavedTracks = tracks.tracksArr;
-          //   console.log('My saved tracks loaded...', this.mySavedTracks);
-          // });
-          // // this.spotifyService.myArtists().then(artists => {
+          });
+          /**** Get User's Most Favorite Artists ****/
+
+          this.spotifyService.topArtists().then(function (artists) {
+            _this3.myArtists = artists; // console.log('Artists info loaded...', this.myArtists);
+          });
+          /**** Get User's Most Favorite Tracks ****/
+
+          this.spotifyService.topTracks().then(function (tracks) {
+            _this3.myTracks = tracks; // console.log('Tracks info loaded...', this.myTracks);
+          });
+          /**** Get All User's Saved Playlist ****/
+
+          this.spotifyService.getUserPlaylists(this.reqPlaylists).then(function (playlists) {
+            _this3.reqPlaylists = playlists.next;
+            _this3.myPlaylists = playlists.playlistsArr; // console.log('Saved playlists loaded...', this.myPlaylists);
+          });
+          /**** Get 100 of User's Most Recent Saved Tracks ****/
+
+          this.spotifyService.getUserSavedTracks(this.reqTracks).then(function (tracks) {
+            _this3.reqTracks = tracks.next; // this.mySavedTracks = tracks.tracksArr;
+            // tracks.tracksArr.forEach(track => {
+            //   track.artists = this.getArtists(track.artists);
+            // });
+
+            _this3.mySavedTracks = tracks.tracksArr;
+            console.log('My saved tracks loaded...', _this3.mySavedTracks);
+          }); // // this.spotifyService.myArtists().then(artists => {
           // //   console.log('My followed artists loaded...');
           // // });
         }
@@ -2797,7 +2798,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.isLoggedIn = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.links.push({
           linkName: 'Login',
-          path: 'http://localhost:5000/login'
+          path: '/login'
         });
         this.isLoggedIn.next(false);
       }
@@ -2821,7 +2822,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.clearAllLinks();
             this.links.push({
               linkName: 'Login',
-              path: 'http://localhost:5000/login'
+              path: '/login'
             });
           }
         }
