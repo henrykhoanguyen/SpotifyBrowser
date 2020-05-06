@@ -33,6 +33,24 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
+// Serve static assest if in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("Spotify-Client/dist/Spotify-Client"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(
+        __dirname,
+        "Spotify-Client",
+        "dist",
+        "Spotify-Client",
+        "index.html"
+      )
+    );
+  });
+}
+
 const server = app.listen(
   PORT,
   console.log(
