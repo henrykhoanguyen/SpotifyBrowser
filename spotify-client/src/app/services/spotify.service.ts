@@ -11,7 +11,8 @@ import { AlbumData } from '../data/album-data';
   providedIn: 'root'
 })
 export class SpotifyService {
-  private expressBaseUrl = 'http://localhost:5000';
+  // private expressBaseUrl = 'http://localhost:5000';
+  private expressBaseUrl = '';
 
   constructor(private http: HttpClient) {
     console.log('Spotify service initialized...');
