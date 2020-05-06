@@ -30,13 +30,13 @@ export class MainPageComponent implements OnInit {
     this.navbarService.updateLoginStatus(true);
 
     // /**** Get User's Info and URL to their profile ****/
-    // this.spotifyService.aboutMe().then(data => {
-    //   this.userImg = data.userImg;
-    //   this.userName = data.name;
-    //   this.userProfile = data.userProfile;
+    this.spotifyService.aboutMe().then(data => {
+      this.userImg = data.userImg;
+      this.userName = data.name;
+      this.userProfile = data.userProfile;
 
-    //   console.log('User info loaded...');
-    // });
+      console.log('User info loaded...');
+    });
 
     // /**** Get User's Most Favorite Artists ****/
     // this.spotifyService.topArtists().then(artists => {
