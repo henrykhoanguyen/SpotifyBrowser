@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from '../../services/spotify.service';
 import { DatePipe } from '@angular/common';
 import { TrackData } from '../../data/track-data';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 
 @Component({
   selector: 'app-single-page',
@@ -27,9 +28,12 @@ export class SinglePageComponent implements OnInit {
 
   private pipe = new DatePipe('en-US');
 
-  constructor(private activatedRouter: ActivatedRoute, private spotifyService: SpotifyService) { }
+  constructor(private activatedRouter: ActivatedRoute, private spotifyService: SpotifyService, private navbarService: NavBarService) { }
 
   ngOnInit() {
+    this.navbarService.updateNavAfterAuth();
+    this.navbarService.updateLoginStatus(true);
+    // TODO: fix nav bar in single page
     // console.log(this.type, this.id);
 
     this.spotifyService.getSingle(this.id, this.type).then(result => {
@@ -37,20 +41,19 @@ export class SinglePageComponent implements OnInit {
       if (result) {
         this.data = result;
 
-        if (this.type === 'track') {
+        if (result.type === 'track') {
           // Get formatted date
           this.releaseDate = this.pipe.transform(result['album'].release_date, 'fullDate');
           // Get artist(s) that worked on a track
           this.artists = this.getArtists(result['artists']);
         }
 
-        if (this.type === 'album') {
+        if (result.type === 'album') {
           // Get formatted date
           this.releaseDate = this.pipe.transform(result['release_date'], 'fullDate');
           // Get artist(s) that works on an album
           this.artists = this.getArtists(result['artists']);
 
-          // TODO: make tracks detail for table
           result['tracks'].forEach(track => {
             // console.log(track);
             this.tracks.push(new TrackData(track));

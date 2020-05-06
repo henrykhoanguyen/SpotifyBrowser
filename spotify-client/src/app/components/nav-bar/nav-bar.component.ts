@@ -38,19 +38,24 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
-  search(event: any): void {
+  keyUp(event: any): void {
 
     if (event.target.value.length > 0) {
       this.query = event.target.value;
 
-      this.spotifyService.search(this.query).then(results => {
-        // console.log(results);
+      // Set delay on input from users
+      this.search(this.query);
 
-        this.results = results;
-      });
     } else {
       this.query = '';
       this.results = '';
     }
+  }
+
+  private search(query) {
+    this.spotifyService.search(query).then(results => {
+      // console.log(results);
+      this.results = results;
+    });
   }
 }

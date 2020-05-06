@@ -45,8 +45,7 @@
           type="text"
           placeholder="Search . . ."
           aria-label="Search"
-          [value]="query"
-          (keyup)="search($event)"
+          (keyup)="keyUp($event)"
         />
         <!-- *ngIf="results" -->
         <div *ngIf="results" style="display:contents">
