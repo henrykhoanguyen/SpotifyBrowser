@@ -1338,12 +1338,12 @@ let MainPageComponent = class MainPageComponent {
         this.navbarService.updateNavAfterAuth();
         this.navbarService.updateLoginStatus(true);
         // /**** Get User's Info and URL to their profile ****/
-        // this.spotifyService.aboutMe().then(data => {
-        //   this.userImg = data.userImg;
-        //   this.userName = data.name;
-        //   this.userProfile = data.userProfile;
-        //   console.log('User info loaded...');
-        // });
+        this.spotifyService.aboutMe().then(data => {
+            this.userImg = data.userImg;
+            this.userName = data.name;
+            this.userProfile = data.userProfile;
+            console.log('User info loaded...');
+        });
         // /**** Get User's Most Favorite Artists ****/
         // this.spotifyService.topArtists().then(artists => {
         //   this.myArtists = artists;
@@ -1670,13 +1670,13 @@ let SpotifyService = class SpotifyService {
         console.log('Spotify service initialized...');
     }
     sendRequest2Express(endpoint) {
-        // console.log(this.expressBaseUrl + endpoint);
+        console.log(this.expressBaseUrl + endpoint);
         this.http.get(this.expressBaseUrl + endpoint).subscribe(res => { });
         return Promise.resolve(this.http.get(this.expressBaseUrl + endpoint).toPromise());
     }
     aboutMe() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            return yield this.sendRequest2Express('/me').then(data => {
+            return yield this.sendRequest2Express('/').then(data => {
                 if (data.success) {
                     // console.log('User\'s profile loaded...');
                     // console.log(data);

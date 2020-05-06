@@ -2424,15 +2424,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(MainPageComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this3 = this;
+
           this.navbarService.updateNavAfterAuth();
           this.navbarService.updateLoginStatus(true); // /**** Get User's Info and URL to their profile ****/
-          // this.spotifyService.aboutMe().then(data => {
-          //   this.userImg = data.userImg;
-          //   this.userName = data.name;
-          //   this.userProfile = data.userProfile;
-          //   console.log('User info loaded...');
-          // });
-          // /**** Get User's Most Favorite Artists ****/
+
+          this.spotifyService.aboutMe().then(function (data) {
+            _this3.userImg = data.userImg;
+            _this3.userName = data.name;
+            _this3.userProfile = data.userProfile;
+            console.log('User info loaded...');
+          }); // /**** Get User's Most Favorite Artists ****/
           // this.spotifyService.topArtists().then(artists => {
           //   this.myArtists = artists;
           //   // console.log('Artists info loaded...', this.myArtists);
@@ -2488,13 +2490,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getDisplayPlaylists",
         value: function getDisplayPlaylists() {
-          var _this3 = this;
+          var _this4 = this;
 
           if (this.reqPlaylists !== null) {
             this.spotifyService.getUserPlaylists(this.reqPlaylists).then(function (playlists) {
               // console.log(playlists);
-              _this3.reqPlaylists = playlists.next;
-              _this3.myPlaylists = _this3.myPlaylists.concat(playlists.playlistsArr); // console.log('Saved playlists loaded...', this.myPlaylists);
+              _this4.reqPlaylists = playlists.next;
+              _this4.myPlaylists = _this4.myPlaylists.concat(playlists.playlistsArr); // console.log('Saved playlists loaded...', this.myPlaylists);
             });
           } else {
             console.log('No more playlists to load...');
@@ -2511,12 +2513,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getMoreTracks",
         value: function getMoreTracks() {
-          var _this4 = this;
+          var _this5 = this;
 
           if (this.reqTracks !== null && this.mySavedTracks.length !== 100) {
             this.spotifyService.getUserSavedTracks(this.reqTracks).then(function (tracks) {
-              _this4.reqTracks = tracks.next;
-              _this4.mySavedTracks = _this4.mySavedTracks.concat(tracks.tracksArr);
+              _this5.reqTracks = tracks.next;
+              _this5.mySavedTracks = _this5.mySavedTracks.concat(tracks.tracksArr);
             });
           } else {
             console.log('No more items to load...');
@@ -2650,7 +2652,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(SinglePageComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this5 = this;
+          var _this6 = this;
 
           this.navbarService.updateNavAfterAuth();
           this.navbarService.updateLoginStatus(true); // TODO: fix nav bar in single page
@@ -2660,30 +2662,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log(result);
 
             if (result) {
-              _this5.data = result;
+              _this6.data = result;
 
               if (result.type === 'track') {
                 // Get formatted date
-                _this5.releaseDate = _this5.pipe.transform(result['album'].release_date, 'fullDate'); // Get artist(s) that worked on a track
+                _this6.releaseDate = _this6.pipe.transform(result['album'].release_date, 'fullDate'); // Get artist(s) that worked on a track
 
-                _this5.artists = _this5.getArtists(result['artists']);
+                _this6.artists = _this6.getArtists(result['artists']);
               }
 
               if (result.type === 'album') {
                 // Get formatted date
-                _this5.releaseDate = _this5.pipe.transform(result['release_date'], 'fullDate'); // Get artist(s) that works on an album
+                _this6.releaseDate = _this6.pipe.transform(result['release_date'], 'fullDate'); // Get artist(s) that works on an album
 
-                _this5.artists = _this5.getArtists(result['artists']);
+                _this6.artists = _this6.getArtists(result['artists']);
                 result['tracks'].forEach(function (track) {
                   // console.log(track);
-                  _this5.tracks.push(new _data_track_data__WEBPACK_IMPORTED_MODULE_5__["TrackData"](track));
+                  _this6.tracks.push(new _data_track_data__WEBPACK_IMPORTED_MODULE_5__["TrackData"](track));
                 });
 
-                _this5.tracks.forEach(function (track) {
-                  track.artists = _this5.getArtists(track.artists);
+                _this6.tracks.forEach(function (track) {
+                  track.artists = _this6.getArtists(track.artists);
                 });
 
-                console.log(_this5.tracks);
+                console.log(_this6.tracks);
               } // console.log(this.artists, this.releaseDate);
 
             }
@@ -2691,13 +2693,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (this.type === 'artists') {
             this.spotifyService.getArtistTopTracks(this.id).then(function (tracks) {
-              _this5.tracks = tracks;
+              _this6.tracks = tracks;
 
-              _this5.tracks.forEach(function (track) {
-                track.artists = _this5.getArtists(track.artists);
+              _this6.tracks.forEach(function (track) {
+                track.artists = _this6.getArtists(track.artists);
               });
 
-              console.log(_this5.tracks);
+              console.log(_this6.tracks);
             });
           }
         }
@@ -2845,12 +2847,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "removeLink",
         value: function removeLink(_ref) {
-          var _this6 = this;
+          var _this7 = this;
 
           var linkName = _ref.linkName;
           this.links.forEach(function (link, index) {
             if (link.linkName === linkName) {
-              _this6.links.splice(linkName, 1);
+              _this7.links.splice(linkName, 1);
             }
           });
         }
@@ -2952,7 +2954,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(SpotifyService, [{
         key: "sendRequest2Express",
         value: function sendRequest2Express(endpoint) {
-          // console.log(this.expressBaseUrl + endpoint);
+          console.log(this.expressBaseUrl + endpoint);
           this.http.get(this.expressBaseUrl + endpoint).subscribe(function (res) {});
           return Promise.resolve(this.http.get(this.expressBaseUrl + endpoint).toPromise());
         }
@@ -2967,7 +2969,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 switch (_context.prev = _context.next) {
                   case 0:
                     _context.next = 2;
-                    return this.sendRequest2Express('/me').then(function (data) {
+                    return this.sendRequest2Express('/').then(function (data) {
                       if (data.success) {
                         // console.log('User\'s profile loaded...');
                         // console.log(data);
