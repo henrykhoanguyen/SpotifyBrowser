@@ -111,7 +111,7 @@ exports.login = (req, res, next) => {
       process.env.Client_ID +
       (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
       "&redirect_uri=" +
-      encodeURIComponent(redirect_uri)
+      redirect_uri
   );
 };
 
