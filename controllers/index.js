@@ -6,8 +6,8 @@ const fs = require("fs");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
-// const redirect_uri = "http://localhost:5000/callback"; // for development
-const redirect_uri = "/callback";                         // for production
+// const redirect_uri = "http://localhost:5000/callback";                 // for development
+const redirect_uri = "https://us-spotify-browser.herokuapp.com/callback"; // for production
 var access_token = null;
 var refresh_token = null;
 
