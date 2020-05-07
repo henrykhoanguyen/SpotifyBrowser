@@ -111,7 +111,7 @@ exports.login = (req, res, next) => {
       process.env.Client_ID +
       (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
       "&redirect_uri=" +
-      redirect_uri
+      encodeURIComponent(redirect_uri)
   );
 };
 
@@ -150,6 +150,7 @@ exports.callBack = (req, res, next) => {
       } else {
         console.log(response);
         // res.redirect("http://localhost:4200"); // redirect user to client landing page
+        res.redirect("https://us-spotify-browser.herokuapp.com"); // redirect user to client landing page
       }
     })
     .then(json => {
@@ -165,7 +166,7 @@ exports.callBack = (req, res, next) => {
         }),
         () => {
           // res.redirect("http://localhost:4200/me"); // for development
-          res.redirect("/me"); // for production
+          res.redirect("https://us-spotify-browser.herokuapp.com/me"); // for production
           // res.status(200).json({ success: true });
         }
       );
