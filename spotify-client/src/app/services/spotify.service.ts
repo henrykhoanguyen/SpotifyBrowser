@@ -11,15 +11,15 @@ import { AlbumData } from '../data/album-data';
   providedIn: 'root'
 })
 export class SpotifyService {
-  // private expressBaseUrl = 'http://localhost:5000';
-  private expressBaseUrl = '';
+  private expressBaseUrl = 'http://localhost:5000'; // for development
+  // private expressBaseUrl = '';                   // for production
 
   constructor(private http: HttpClient) {
     console.log('Spotify service initialized...');
   }
 
   private sendRequest2Express(endpoint: string): Promise<any> {
-    console.log(this.expressBaseUrl + endpoint);
+    // console.log(this.expressBaseUrl + endpoint);
     this.http.get(this.expressBaseUrl + endpoint).subscribe(res => {});
 
     return Promise.resolve(

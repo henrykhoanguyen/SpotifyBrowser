@@ -6,8 +6,8 @@ const fs = require("fs");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
-// const redirect_uri = "http://localhost:5000/callback";                 // for development
-const redirect_uri = "https://us-spotify-browser.herokuapp.com/callback"; // for production
+const redirect_uri = "http://localhost:5000/callback";                 // for development
+// const redirect_uri = "https://us-spotify-browser.herokuapp.com/callback"; // for production
 var access_token = null;
 var refresh_token = null;
 
@@ -150,7 +150,7 @@ exports.callBack = (req, res, next) => {
       } else {
         console.log(response);
         // res.redirect("http://localhost:4200"); // redirect user to client landing page
-        res.redirect("https://us-spotify-browser.herokuapp.com"); // redirect user to client landing page
+        // res.redirect("https://us-spotify-browser.herokuapp.com"); // redirect user to client landing page
       }
     })
     .then(json => {
@@ -165,8 +165,8 @@ exports.callBack = (req, res, next) => {
           refresh_token: refresh_token
         }),
         () => {
-          // res.redirect("http://localhost:4200/me"); // for development
-          res.redirect("https://us-spotify-browser.herokuapp.com/me"); // for production
+          res.redirect("http://localhost:4200/me"); // for development
+          // res.redirect("https://us-spotify-browser.herokuapp.com/me"); // for production
           // res.status(200).json({ success: true });
         }
       );
