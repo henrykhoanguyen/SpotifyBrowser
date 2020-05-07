@@ -28,7 +28,7 @@ export class SpotifyService {
   }
 
   async aboutMe(): Promise<ProfileData> {
-    return await this.sendRequest2Express('/').then(data => {
+    return await this.sendRequest2Express('/me').then(data => {
       if (data.success) {
         // console.log('User\'s profile loaded...');
         // console.log(data);

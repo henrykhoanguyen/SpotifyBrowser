@@ -76,17 +76,17 @@ function makeAPIRequest(url, res) {
 	});
 }
 
-// exports.general = (req, res, next) => {
-//   // console.log("HELLO")
+exports.general = (req, res, next) => {
+  // console.log("HELLO")
   
-//   fs.readFile("./config/tokens.json", (err, data) => {
-//     data = JSON.parse(data);
-//     // console.log(JSON.parse(data));
-//     access_token = data.access_token;
-//     refresh_token = data.refresh_token;
-//     next();
-//   });
-// };
+  fs.readFile("./config/tokens.json", (err, data) => {
+    data = JSON.parse(data);
+    // console.log(JSON.parse(data));
+    access_token = data.access_token;
+    refresh_token = data.refresh_token;
+    next();
+  });
+};
 
 exports.login = (req, res, next) => {
   // console.log(process.env.Client_ID);
@@ -180,13 +180,7 @@ exports.callBack = (req, res, next) => {
 // Get Info About Logged in User
 // https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/
 exports.aboutMe = (req, res, next) => {
-  fs.readFile("./config/tokens.json", (err, data) => {
-    data = JSON.parse(data);
-    // console.log(JSON.parse(data));
-    access_token = data.access_token;
-    refresh_token = data.refresh_token;
-    // next();
-  });
+
   makeAPIRequest("https://api.spotify.com/v1/me", res);
 }
 

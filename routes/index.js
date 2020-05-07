@@ -18,10 +18,10 @@ const {
 const router = express.Router();
 
 router.route("/login").get(login);
-// router.route("*").get(general);
+router.route("/").get(general);
 router.route("/callback").get(callBack);
 
-router.route("/").get(aboutMe);
+router.route("/me").get(aboutMe);
 
 router.route("/topArtists").get(topArtists);
 router.route("/topTracks").get(topTracks);
