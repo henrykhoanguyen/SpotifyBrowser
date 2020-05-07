@@ -6,7 +6,8 @@ const fs = require("fs");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
-const redirect_uri = "http://localhost:5000/callback";
+// const redirect_uri = "http://localhost:5000/callback"; // for development
+const redirect_uri = "/callback";                         // for production
 var access_token = null;
 var refresh_token = null;
 
@@ -163,7 +164,8 @@ exports.callBack = (req, res, next) => {
           refresh_token: refresh_token
         }),
         () => {
-          res.redirect("http://localhost:4200/me");
+          // res.redirect("http://localhost:4200/me"); // for development
+          res.redirect("/me"); // for production
           // res.status(200).json({ success: true });
         }
       );

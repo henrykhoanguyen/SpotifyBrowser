@@ -162,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section class=\"home-main-section\">\n  <div class=\"image-wrapper\">\n    <img src=\"../assets/hand.png\" alt=\"diskHand\" id=\"handImg\">\n  </div>\n\n  <div class=\"call-to-action\">\n    <h1 class=\"title\">Feel The Music</h1>\n    <span class=\"subtitle\">Stream over 20 thousand new song with one click.</span>\n    <a type=\"button\" href=\"http://localhost:5000/login\" class=\"btn btn-primary\">Login</a>\n  </div>\n</section>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<section class=\"home-main-section\">\n  <div class=\"image-wrapper\">\n    <img src=\"../assets/hand.png\" alt=\"diskHand\" id=\"handImg\">\n  </div>\n\n  <div class=\"call-to-action\">\n    <h1 class=\"title\">Feel The Music</h1>\n    <span class=\"subtitle\">Stream over 20 thousand new song with one click.</span>\n    <a type=\"button\" routerLink=\"/login\" class=\"btn btn-primary\">Login</a>\n  </div>\n</section>\n");
 
 /***/ }),
 
