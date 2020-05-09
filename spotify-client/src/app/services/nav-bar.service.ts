@@ -10,8 +10,8 @@ export class NavBarService {
   private isLoggedIn = new Subject<boolean>();
 
   constructor() {
-    // this.links.push({linkName: 'Login', path: '/login'}); // for production
-    this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
+    this.links.push({linkName: 'Login', path: '/login'}); // for production
+    // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
     this.isLoggedIn.next(false);
   }
 
@@ -28,8 +28,8 @@ export class NavBarService {
     // console.log(status);
     if (!status) {
       this.clearAllLinks();
-    // this.links.push({linkName: 'Login', path: '/login'}); // for production
-      this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
+    this.links.push({linkName: 'Login', path: '/login'}); // for production
+      // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
     }
   }
 

@@ -1,15 +1,24 @@
 const dotenv = require("dotenv");
 const fetch = require("node-fetch");
 const fs = require("fs");
+const path = require("path");
 // const asyncHandler = require("../middleware/async");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
-const redirect_uri = "http://localhost:5000/callback";                 // for development
-// const redirect_uri = "https://us-spotify-browser.herokuapp.com/callback"; // for production
+// const redirect_uri = "http://localhost:5000/callback";                 // for development
+const redirect_uri = "https://us-spotify-browser.herokuapp.com/callback"; // for production
 var access_token = null;
 var refresh_token = null;
+
+fs.readFile("./config/tokens.json", (err, data) => {
+  data = JSON.parse(data);
+  // console.log(JSON.parse(data));
+  access_token = data.access_token;
+  refresh_token = data.refresh_token;
+  next();
+});
 
 function refresh() {
 	const params = new URLSearchParams();
@@ -79,13 +88,13 @@ function makeAPIRequest(url, res) {
 exports.general = (req, res, next) => {
   // console.log("HELLO")
   
-  fs.readFile("./config/tokens.json", (err, data) => {
-    data = JSON.parse(data);
-    // console.log(JSON.parse(data));
-    access_token = data.access_token;
-    refresh_token = data.refresh_token;
-    next();
-  });
+  // fs.readFile("./config/tokens.json", (err, data) => {
+  //   data = JSON.parse(data);
+  //   // console.log(JSON.parse(data));
+  //   access_token = data.access_token;
+  //   refresh_token = data.refresh_token;
+  //   next();
+  // });
 };
 
 exports.login = (req, res, next) => {
@@ -165,8 +174,17 @@ exports.callBack = (req, res, next) => {
           refresh_token: refresh_token
         }),
         () => {
-          res.redirect("http://localhost:4200/me"); // for development
-          // res.redirect("https://us-spotify-browser.herokuapp.com/me"); // for production
+          // res.redirect("http://localhost:4200/me"); // for development
+          res.redirect("https://us-spotify-browser.herokuapp.com/me"); // for production
+          // res.sendFile(
+          //   path.resolve(
+          //     __dirname,
+          //     "spotify-client",
+          //     "dist",
+          //     "Spotify-Client",
+          //     "index.html"
+          //   )
+          // );
           // res.status(200).json({ success: true });
         }
       );
