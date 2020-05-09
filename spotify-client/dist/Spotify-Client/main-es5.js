@@ -2799,7 +2799,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.links.push({
           linkName: 'Login',
           path: '/login'
-        });
+        }); // for production
+        // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
+
         this.isLoggedIn.next(false);
       }
 
@@ -2823,7 +2825,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.links.push({
               linkName: 'Login',
               path: '/login'
-            });
+            }); // for production
+            // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
           }
         }
       }, {
@@ -2947,16 +2950,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function SpotifyService(http) {
         _classCallCheck(this, SpotifyService);
 
-        this.http = http; // private expressBaseUrl = 'http://localhost:5000';
+        this.http = http; // private expressBaseUrl = 'http://localhost:5000'; // for development
 
-        this.expressBaseUrl = '';
+        this.expressBaseUrl = ''; // for production
+
         console.log('Spotify service initialized...');
       }
 
       _createClass(SpotifyService, [{
         key: "sendRequest2Express",
         value: function sendRequest2Express(endpoint) {
-          console.log(this.expressBaseUrl + endpoint);
+          // console.log(this.expressBaseUrl + endpoint);
           this.http.get(this.expressBaseUrl + endpoint).subscribe(function (res) {});
           return Promise.resolve(this.http.get(this.expressBaseUrl + endpoint).toPromise());
         }

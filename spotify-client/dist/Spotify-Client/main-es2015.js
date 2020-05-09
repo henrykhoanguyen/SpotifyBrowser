@@ -1590,7 +1590,8 @@ let NavBarService = class NavBarService {
     constructor() {
         this.links = new Array();
         this.isLoggedIn = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
-        this.links.push({ linkName: 'Login', path: '/login' });
+        this.links.push({ linkName: 'Login', path: '/login' }); // for production
+        // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
         this.isLoggedIn.next(false);
     }
     getLogInStatus() {
@@ -1604,7 +1605,8 @@ let NavBarService = class NavBarService {
         // console.log(status);
         if (!status) {
             this.clearAllLinks();
-            this.links.push({ linkName: 'Login', path: '/login' });
+            this.links.push({ linkName: 'Login', path: '/login' }); // for production
+            // this.links.push({linkName: 'Login', path: 'http://localhost:5000/login'}); // for development
         }
     }
     updateNavAfterAuth() {
@@ -1666,12 +1668,12 @@ __webpack_require__.r(__webpack_exports__);
 let SpotifyService = class SpotifyService {
     constructor(http) {
         this.http = http;
-        // private expressBaseUrl = 'http://localhost:5000';
-        this.expressBaseUrl = '';
+        // private expressBaseUrl = 'http://localhost:5000'; // for development
+        this.expressBaseUrl = ''; // for production
         console.log('Spotify service initialized...');
     }
     sendRequest2Express(endpoint) {
-        console.log(this.expressBaseUrl + endpoint);
+        // console.log(this.expressBaseUrl + endpoint);
         this.http.get(this.expressBaseUrl + endpoint).subscribe(res => { });
         return Promise.resolve(this.http.get(this.expressBaseUrl + endpoint).toPromise());
     }
